@@ -4,13 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ÉLARA — Luxury Handbags</title>
+    <title>LUXEVA — Beyond Luxury</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
+
+        :root {
+            --black: #050504;
+            --dark: #0b0a08;
+            --gold: #c9a45c;
+            --gold-light: #f0d18a;
+            --cream: #f5efe4;
+            --muted: #9b9488;
+            --border: rgba(201,164,92,.25);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -22,10 +34,62 @@
         }
 
         body {
-            background: #0c0b09;
-            color: #f4efe6;
-            font-family: 'Montserrat', sans-serif;
+            background: var(--black);
+            color: var(--cream);
+            font-family: Inter, sans-serif;
             font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           CURSOR GLOW
+        ========================= */
+
+        .cursor-glow {
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            pointer-events: none;
+            background: radial-gradient(
+                circle,
+                rgba(201,164,92,.09),
+                transparent 65%
+            );
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            mix-blend-mode: screen;
+        }
+
+        /* =========================
+           GOLD PARTICLES
+        ========================= */
+
+        .particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: .35;
+            animation: floatParticle linear infinite;
+        }
+
+        @keyframes floatParticle {
+            from {
+                transform: translateY(100vh);
+            }
+
+            to {
+                transform: translateY(-100px);
+            }
         }
 
         /* =========================
@@ -38,66 +102,76 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            padding: 25px 6%;
-            transition: 0.4s;
+            padding: 22px 5%;
+            transition: .5s;
         }
 
         header.scrolled {
-            background: rgba(12, 11, 9, 0.95);
-            backdrop-filter: blur(15px);
-            padding: 16px 6%;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            background: rgba(5,5,4,.82);
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid var(--border);
         }
 
         nav {
+            max-width: 1500px;
+            margin: auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
         .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 35px;
-            letter-spacing: 7px;
-            color: #d4af37;
-            font-weight: 500;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 38px;
+            letter-spacing: 8px;
+            color: var(--gold-light);
+        }
+
+        .logo small {
+            display: block;
+            font-family: Inter, sans-serif;
+            font-size: 8px;
+            letter-spacing: 6px;
+            text-align: center;
+            margin-top: -5px;
         }
 
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: 38px;
             list-style: none;
         }
 
         .nav-links a {
-            color: #f4efe6;
             text-decoration: none;
-            font-size: 11px;
+            color: #ddd4c5;
+            font-size: 10px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            transition: 0.3s;
+            transition: .3s;
         }
 
         .nav-links a:hover {
-            color: #d4af37;
+            color: var(--gold-light);
         }
 
-        .nav-icons {
+        .nav-actions {
             display: flex;
             gap: 20px;
         }
 
-        .nav-icons button {
+        .nav-actions button {
             background: none;
-            border: none;
-            color: #f4efe6;
-            font-size: 19px;
+            border: 0;
+            color: white;
+            font-size: 18px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: .3s;
         }
 
-        .nav-icons button:hover {
-            color: #d4af37;
+        .nav-actions button:hover {
+            color: var(--gold-light);
+            transform: translateY(-2px);
         }
 
         /* =========================
@@ -110,314 +184,480 @@
             display: flex;
             align-items: center;
             overflow: hidden;
+
             background:
                 linear-gradient(
                     90deg,
-                    rgba(8, 7, 6, 0.96) 0%,
-                    rgba(8, 7, 6, 0.75) 45%,
-                    rgba(8, 7, 6, 0.20) 100%
+                    rgba(3,3,2,.95) 0%,
+                    rgba(3,3,2,.75) 40%,
+                    rgba(3,3,2,.15) 100%
                 ),
-                url("https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=2000&q=90")
-                center/cover;
+                url("luxury-hero.png") center/cover no-repeat;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(
+                    transparent 70%,
+                    #050504
+                );
+            pointer-events: none;
         }
 
         .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1450px;
             width: 90%;
-            max-width: 1300px;
             margin: auto;
             padding-top: 80px;
         }
 
-        .hero-label {
-            color: #d4af37;
+        .eyebrow {
+            color: var(--gold-light);
             letter-spacing: 5px;
-            font-size: 11px;
             text-transform: uppercase;
+            font-size: 11px;
             margin-bottom: 25px;
         }
 
         .hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(65px, 9vw, 135px);
+            font-family: "Cormorant Garamond", serif;
             font-weight: 300;
-            line-height: 0.85;
+            font-size: clamp(65px, 8vw, 125px);
+            line-height: .85;
             max-width: 800px;
         }
 
         .hero h1 span {
-            color: #d4af37;
+            color: var(--gold-light);
             font-style: italic;
         }
 
-        .hero-text {
-            max-width: 450px;
-            color: #c7c0b5;
-            line-height: 1.8;
+        .hero-description {
+            max-width: 440px;
             margin-top: 35px;
+            line-height: 1.8;
+            color: #c1b9aa;
             font-size: 14px;
         }
 
-        .hero-buttons {
-            margin-top: 40px;
+        .buttons {
             display: flex;
-            gap: 18px;
+            gap: 15px;
+            margin-top: 40px;
         }
 
         .btn {
-            padding: 16px 32px;
+            padding: 17px 30px;
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-size: 10px;
-            transition: 0.3s;
+            transition: .4s;
         }
 
-        .btn-primary {
-            background: #d4af37;
-            color: #0c0b09;
+        .btn-gold {
+            color: #050504;
+            background: var(--gold-light);
         }
 
-        .btn-primary:hover {
-            background: #f1d56a;
-            transform: translateY(-3px);
+        .btn-gold:hover {
+            box-shadow: 0 10px 40px rgba(201,164,92,.25);
+            transform: translateY(-4px);
         }
 
         .btn-outline {
-            border: 1px solid rgba(244,239,230,0.5);
-            color: #f4efe6;
+            color: white;
+            border: 1px solid var(--border);
         }
 
         .btn-outline:hover {
-            border-color: #d4af37;
-            color: #d4af37;
+            border-color: var(--gold-light);
+            color: var(--gold-light);
         }
 
         /* =========================
-           COMMON
+           TECHNOLOGY BAR
+        ========================= */
+
+        .technology {
+            position: relative;
+            z-index: 5;
+            background: rgba(12,11,9,.92);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+        }
+
+        .tech-grid {
+            max-width: 1400px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+        }
+
+        .tech-item {
+            padding: 35px;
+            border-right: 1px solid rgba(201,164,92,.12);
+        }
+
+        .tech-item:last-child {
+            border: 0;
+        }
+
+        .tech-icon {
+            font-size: 30px;
+            color: var(--gold-light);
+            margin-bottom: 15px;
+        }
+
+        .tech-item h3 {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .tech-item p {
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* =========================
+           SECTIONS
         ========================= */
 
         section {
-            padding: 120px 6%;
+            position: relative;
+            z-index: 2;
+            padding: 130px 6%;
         }
 
-        .section-heading {
-            text-align: center;
-            margin-bottom: 65px;
+        .section-title {
+            max-width: 1400px;
+            margin: auto auto 60px;
         }
 
-        .section-heading span {
-            color: #d4af37;
-            font-size: 10px;
-            letter-spacing: 4px;
+        .section-title span {
+            color: var(--gold-light);
             text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 10px;
         }
 
-        .section-heading h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 60px;
-            font-weight: 400;
+        .section-title h2 {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(45px, 5vw, 70px);
+            font-weight: 300;
             margin-top: 15px;
         }
 
         /* =========================
-           COLLECTION
+           PRODUCTS
         ========================= */
-
-        .collection {
-            background: #11100e;
-        }
 
         .products {
             max-width: 1400px;
             margin: auto;
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
+            grid-template-columns: repeat(4,1fr);
+            gap: 18px;
         }
 
         .product {
             position: relative;
+            height: 560px;
             overflow: hidden;
             cursor: pointer;
+            background: #11100d;
+            transform-style: preserve-3d;
+            transition: transform .2s;
         }
 
-        .product-image {
-            height: 480px;
-            overflow: hidden;
-            background: #191714;
-        }
-
-        .product-image img {
+        .product img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: 0.7s;
+            transition: .8s;
         }
 
         .product:hover img {
-            transform: scale(1.07);
+            transform: scale(1.08);
+        }
+
+        .product::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                transparent 45%,
+                rgba(0,0,0,.9)
+            );
         }
 
         .product-info {
-            padding: 20px 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+            right: 25px;
+            z-index: 2;
+        }
+
+        .product-info span {
+            color: var(--gold-light);
+            font-size: 9px;
+            letter-spacing: 3px;
         }
 
         .product-info h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 25px;
-            font-weight: 500;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 32px;
+            font-weight: 400;
+            margin: 7px 0;
         }
 
         .product-info p {
-            color: #d4af37;
-            font-size: 13px;
+            color: #bcb4a6;
+            font-size: 12px;
         }
 
-        .product-tag {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: #d4af37;
-            color: #0c0b09;
-            padding: 8px 13px;
-            font-size: 9px;
-            letter-spacing: 1px;
+        .product-price {
+            color: var(--gold-light) !important;
+            margin-top: 10px;
         }
 
         /* =========================
-           BRAND STORY
+           AI EXPERIENCE
         ========================= */
 
-        .story {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .future {
+            background:
+                radial-gradient(
+                    circle at 80% 50%,
+                    rgba(201,164,92,.08),
+                    transparent 35%
+                ),
+                #090806;
+        }
+
+        .future-container {
             max-width: 1400px;
             margin: auto;
-            padding-top: 0;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 70px;
+            align-items: center;
         }
 
-        .story-image {
-            height: 650px;
-            overflow: hidden;
+        .future-text span {
+            color: var(--gold-light);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 10px;
         }
 
-        .story-image img {
+        .future-text h2 {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 70px;
+            font-weight: 300;
+            line-height: .95;
+            margin: 20px 0;
+        }
+
+        .future-text p {
+            color: var(--muted);
+            max-width: 500px;
+            line-height: 1.9;
+        }
+
+        .features {
+            display: flex;
+            gap: 25px;
+            margin-top: 35px;
+        }
+
+        .feature {
+            border: 1px solid var(--border);
+            padding: 18px;
+            width: 150px;
+        }
+
+        .feature strong {
+            display: block;
+            color: var(--gold-light);
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .feature span {
+            font-size: 9px;
+            letter-spacing: 1px;
+            color: #aaa;
+        }
+
+        /* =========================
+           3D DISPLAY
+        ========================= */
+
+        .product-stage {
+            perspective: 1200px;
+            min-height: 550px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stage-card {
+            width: 470px;
+            height: 470px;
+            position: relative;
+            border: 1px solid var(--border);
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(201,164,92,.12),
+                    transparent 55%
+                ),
+                #0b0a08;
+            transform-style: preserve-3d;
+            transition: transform .5s;
+            box-shadow:
+                0 40px 100px rgba(0,0,0,.7),
+                inset 0 0 80px rgba(201,164,92,.04);
+        }
+
+        .stage-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            mix-blend-mode: screen;
+            opacity: .9;
+        }
+
+        .scan-ring {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border: 1px solid rgba(201,164,92,.4);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            animation: rotateRing 8s linear infinite;
+        }
+
+        .scan-ring::before {
+            content: "";
+            position: absolute;
+            inset: 25px;
+            border: 1px dashed rgba(201,164,92,.3);
+            border-radius: 50%;
+        }
+
+        @keyframes rotateRing {
+            to {
+                transform: translate(-50%,-50%) rotate(360deg);
+            }
+        }
+
+        .scan-text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: var(--gold-light);
+            font-size: 9px;
+            letter-spacing: 3px;
+        }
+
+        /* =========================
+           STORY
+        ========================= */
+
+        .story {
+            max-width: 1400px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .story-image {
+            min-height: 650px;
+            background:
+                linear-gradient(
+                    rgba(0,0,0,.15),
+                    rgba(0,0,0,.4)
+                ),
+                url("luxury-hero.png") center/cover;
         }
 
         .story-content {
+            background: #11100d;
             padding: 80px;
             display: flex;
             justify-content: center;
             flex-direction: column;
-            background: #171512;
         }
 
         .story-content span {
-            color: #d4af37;
-            font-size: 10px;
+            color: var(--gold-light);
             letter-spacing: 4px;
-            text-transform: uppercase;
+            font-size: 10px;
         }
 
         .story-content h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 65px;
-            line-height: 0.95;
-            font-weight: 400;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 70px;
+            font-weight: 300;
+            line-height: .9;
             margin: 20px 0 30px;
         }
 
         .story-content p {
-            color: #bdb6aa;
+            color: var(--muted);
             line-height: 1.9;
-            font-size: 14px;
-            max-width: 480px;
-        }
-
-        .story-content .btn {
-            width: fit-content;
-            margin-top: 35px;
-        }
-
-        /* =========================
-           CRAFT
-        ========================= */
-
-        .craft {
-            background: #0c0b09;
-        }
-
-        .craft-grid {
-            max-width: 1200px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 50px;
-            text-align: center;
-        }
-
-        .craft-item {
-            padding: 30px;
-        }
-
-        .craft-number {
-            font-family: 'Cormorant Garamond', serif;
-            color: #d4af37;
-            font-size: 50px;
-        }
-
-        .craft-item h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
-            margin: 15px 0;
-        }
-
-        .craft-item p {
-            color: #99938a;
             font-size: 13px;
-            line-height: 1.8;
+            max-width: 500px;
         }
 
         /* =========================
-           FEATURED BANNER
+           DIGITAL PASSPORT
         ========================= */
 
-        .banner {
-            min-height: 600px;
-            display: flex;
-            align-items: center;
+        .passport {
+            text-align: center;
             background:
                 linear-gradient(
-                    rgba(0,0,0,0.4),
-                    rgba(0,0,0,0.7)
+                    rgba(0,0,0,.6),
+                    rgba(0,0,0,.85)
                 ),
-                url("https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=2000&q=90")
-                center/cover;
-            text-align: center;
+                url("luxury-hero.png") center/cover fixed;
         }
 
-        .banner-content {
+        .passport-box {
+            max-width: 800px;
             margin: auto;
+            padding: 70px;
+            border: 1px solid var(--border);
+            background: rgba(10,9,7,.75);
+            backdrop-filter: blur(20px);
         }
 
-        .banner-content span {
-            color: #d4af37;
-            letter-spacing: 5px;
-            font-size: 10px;
-        }
-
-        .banner-content h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(55px, 8vw, 100px);
+        .passport-box h2 {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 65px;
             font-weight: 300;
-            line-height: 0.9;
-            margin: 20px 0 35px;
+        }
+
+        .passport-box p {
+            color: var(--muted);
+            line-height: 1.8;
+            margin: 20px auto 35px;
+            max-width: 600px;
         }
 
         /* =========================
@@ -426,47 +666,44 @@
 
         .newsletter {
             text-align: center;
-            background: #11100e;
         }
 
         .newsletter h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 60px;
-            font-weight: 400;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 65px;
+            font-weight: 300;
         }
 
         .newsletter p {
-            color: #99938a;
-            margin: 15px auto 35px;
+            color: var(--muted);
             max-width: 500px;
-            line-height: 1.7;
+            margin: 15px auto 35px;
+            line-height: 1.8;
         }
 
         .newsletter-form {
-            display: flex;
-            max-width: 550px;
+            max-width: 500px;
             margin: auto;
-            border-bottom: 1px solid #6e675d;
+            display: flex;
+            border-bottom: 1px solid var(--border);
         }
 
         .newsletter-form input {
             flex: 1;
-            background: transparent;
-            border: none;
-            outline: none;
             padding: 17px 5px;
+            background: none;
+            border: 0;
+            outline: none;
             color: white;
-            font-family: inherit;
         }
 
         .newsletter-form button {
+            border: 0;
             background: none;
-            border: none;
-            color: #d4af37;
-            text-transform: uppercase;
+            color: var(--gold-light);
             letter-spacing: 2px;
-            cursor: pointer;
             font-size: 10px;
+            cursor: pointer;
         }
 
         /* =========================
@@ -474,36 +711,24 @@
         ========================= */
 
         footer {
-            background: #080807;
-            padding: 70px 6% 30px;
+            padding: 70px 6% 25px;
+            background: #030302;
+            border-top: 1px solid rgba(201,164,92,.15);
         }
 
         .footer-grid {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: auto;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 50px;
         }
 
-        .footer-brand .logo {
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        .footer-brand p {
-            max-width: 300px;
-            color: #817b72;
-            line-height: 1.8;
-            font-size: 13px;
-        }
-
         footer h4 {
-            color: #d4af37;
+            color: var(--gold-light);
             font-size: 10px;
             letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         footer ul {
@@ -511,56 +736,75 @@
         }
 
         footer li {
-            margin-bottom: 13px;
+            margin-bottom: 12px;
         }
 
         footer a {
+            color: #777168;
             text-decoration: none;
-            color: #aaa49b;
             font-size: 12px;
-            transition: 0.3s;
+            transition: .3s;
         }
 
         footer a:hover {
-            color: #d4af37;
+            color: var(--gold-light);
+        }
+
+        .footer-description {
+            color: #777168;
+            max-width: 330px;
+            font-size: 12px;
+            line-height: 1.8;
+            margin-top: 20px;
         }
 
         .copyright {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 60px auto 0;
             padding-top: 25px;
-            border-top: 1px solid #24221e;
-            color: #5e5a54;
-            font-size: 10px;
-            letter-spacing: 1px;
+            border-top: 1px solid #171512;
             text-align: center;
+            color: #45413b;
+            font-size: 9px;
+            letter-spacing: 2px;
         }
 
         /* =========================
-           MOBILE
+           SCROLL ANIMATION
         ========================= */
 
-        @media (max-width: 1000px) {
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width:1000px) {
 
             .nav-links {
                 display: none;
             }
 
-            .products {
-                grid-template-columns: repeat(2, 1fr);
+            .tech-grid {
+                grid-template-columns: 1fr 1fr;
             }
 
+            .products {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .future-container,
             .story {
                 grid-template-columns: 1fr;
-            }
-
-            .story-image {
-                height: 500px;
-            }
-
-            .craft-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
             }
 
             .footer-grid {
@@ -568,96 +812,144 @@
             }
         }
 
-        @media (max-width: 600px) {
+        @media(max-width:600px) {
 
             header {
-                padding: 20px 5%;
+                padding: 15px 5%;
             }
 
             .logo {
-                font-size: 27px;
-                letter-spacing: 5px;
-            }
-
-            section {
-                padding: 80px 5%;
+                font-size: 28px;
             }
 
             .hero {
                 background-position: 65% center;
             }
 
-            .hero-content {
-                width: 90%;
-            }
-
             .hero h1 {
                 font-size: 65px;
             }
 
-            .hero-buttons {
+            .buttons {
                 flex-direction: column;
                 width: fit-content;
+            }
+
+            section {
+                padding: 80px 5%;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-item {
+                border-right: 0;
+                border-bottom: 1px solid var(--border);
             }
 
             .products {
                 grid-template-columns: 1fr;
             }
 
-            .product-image {
+            .product {
                 height: 500px;
             }
 
-            .section-heading h2,
+            .future-text h2,
+            .story-content h2,
+            .passport-box h2,
             .newsletter h2 {
-                font-size: 45px;
+                font-size: 48px;
+            }
+
+            .features {
+                flex-wrap: wrap;
+            }
+
+            .stage-card {
+                width: 330px;
+                height: 330px;
             }
 
             .story-content {
                 padding: 50px 30px;
             }
 
-            .story-content h2 {
-                font-size: 50px;
-            }
-
             .footer-grid {
                 grid-template-columns: 1fr;
             }
 
-            .newsletter-form {
-                width: 100%;
-            }
         }
+
     </style>
 </head>
 
+
 <body>
 
-    <!-- =========================
-         NAVIGATION
-    ========================== -->
+    <!-- CURSOR -->
+    <div class="cursor-glow"></div>
+
+
+    <!-- PARTICLES -->
+
+    <div class="particles">
+
+        <span class="particle" style="left:5%;animation-duration:12s;"></span>
+        <span class="particle" style="left:15%;animation-duration:18s;"></span>
+        <span class="particle" style="left:28%;animation-duration:15s;"></span>
+        <span class="particle" style="left:42%;animation-duration:20s;"></span>
+        <span class="particle" style="left:55%;animation-duration:14s;"></span>
+        <span class="particle" style="left:67%;animation-duration:19s;"></span>
+        <span class="particle" style="left:78%;animation-duration:13s;"></span>
+        <span class="particle" style="left:90%;animation-duration:17s;"></span>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
 
     <header id="header">
 
         <nav>
 
             <div class="logo">
-                ÉLARA
+
+                LUXEVA
+
+                <small>PARIS</small>
+
             </div>
 
+
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#collection">Collection</a></li>
-                <li><a href="#story">Our Story</a></li>
-                <li><a href="#craft">Craftsmanship</a></li>
-                <li><a href="#contact">Contact</a></li>
+
+                <li><a href="#collection">New In</a></li>
+
+                <li><a href="#collection">Handbags</a></li>
+
+                <li><a href="#collection">Collections</a></li>
+
+                <li><a href="#future">Technology</a></li>
+
+                <li><a href="#story">Maison</a></li>
+
+                <li><a href="#contact">Journal</a></li>
+
             </ul>
 
-            <div class="nav-icons">
+
+            <div class="nav-actions">
+
                 <button>⌕</button>
+
                 <button>♡</button>
+
+                <button>♙</button>
+
                 <button>🛍</button>
+
             </div>
 
         </nav>
@@ -665,37 +957,38 @@
     </header>
 
 
-    <!-- =========================
-         HERO
-    ========================== -->
+    <!-- HERO -->
 
-    <section class="hero" id="home">
+    <section class="hero">
 
-        <div class="hero-content">
+        <div class="hero-content reveal">
 
-            <div class="hero-label">
-                The New Collection · 2026
+            <div class="eyebrow">
+                Timeless Elegance · Future Technology
             </div>
 
             <h1>
                 Crafted for<br>
-                <span>Timeless</span> Moments.
+                the <span>Exceptional.</span>
             </h1>
 
-            <p class="hero-text">
-                Discover a world where Italian craftsmanship meets
-                contemporary elegance. Each ÉLARA handbag is designed
-                to become a part of your story.
+            <p class="hero-description">
+
+                Where heritage craftsmanship meets cutting-edge
+                innovation to create a new definition of luxury.
+
             </p>
 
-            <div class="hero-buttons">
-                <a href="#collection" class="btn btn-primary">
-                    Explore Collection
+            <div class="buttons">
+
+                <a href="#collection" class="btn btn-gold">
+                    Discover Collection →
                 </a>
 
-                <a href="#story" class="btn btn-outline">
-                    Discover Élara
+                <a href="#future" class="btn btn-outline">
+                    Explore Technology
                 </a>
+
             </div>
 
         </div>
@@ -703,93 +996,180 @@
     </section>
 
 
-    <!-- =========================
-         COLLECTION
-    ========================== -->
+    <!-- TECHNOLOGY -->
 
-    <section class="collection" id="collection">
+    <div class="technology">
 
-        <div class="section-heading">
+        <div class="tech-grid">
 
-            <span>Curated Selection</span>
+            <div class="tech-item">
 
-            <h2>The Signature Collection</h2>
+                <div class="tech-icon">◈</div>
+
+                <h3>3D Visualization</h3>
+
+                <p>
+                    Explore every detail with immersive
+                    360° product experiences.
+                </p>
+
+            </div>
+
+
+            <div class="tech-item">
+
+                <div class="tech-icon">⌗</div>
+
+                <h3>Augmented Reality</h3>
+
+                <p>
+                    Visualize your perfect bag in your
+                    environment before purchasing.
+                </p>
+
+            </div>
+
+
+            <div class="tech-item">
+
+                <div class="tech-icon">⬡</div>
+
+                <h3>Smart Materials</h3>
+
+                <p>
+                    Advanced materials engineered for
+                    exceptional durability.
+                </p>
+
+            </div>
+
+
+            <div class="tech-item">
+
+                <div class="tech-icon">♢</div>
+
+                <h3>Digital Authenticity</h3>
+
+                <p>
+                    Every piece receives a unique
+                    digital identity.
+                </p>
+
+            </div>
 
         </div>
+
+    </div>
+
+
+    <!-- COLLECTION -->
+
+    <section id="collection">
+
+        <div class="section-title reveal">
+
+            <span>Our Iconic Collections</span>
+
+            <h2>
+                Modern Design. Eternal Luxury.
+            </h2>
+
+        </div>
+
 
         <div class="products">
 
-            <div class="product">
+            <div class="product reveal">
 
-                <div class="product-tag">
-                    NEW
-                </div>
-
-                <div class="product-image">
-                    <img
-                        src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85"
-                        alt="Luxury handbag"
-                    >
-                </div>
+                <img
+                    src="luxury-hero.png"
+                    alt="LUXEVA Iconic Classic"
+                >
 
                 <div class="product-info">
-                    <h3>Amara</h3>
-                    <p>₹48,500</p>
+
+                    <span>ICONIC CLASSICS</span>
+
+                    <h3>Le Parisien</h3>
+
+                    <p>Signature Crocodile Leather</p>
+
+                    <p class="product-price">
+                        ₹1,85,000
+                    </p>
+
                 </div>
 
             </div>
 
 
-            <div class="product">
+            <div class="product reveal">
 
-                <div class="product-image">
-                    <img
-                        src="https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=85"
-                        alt="Luxury handbag"
-                    >
-                </div>
+                <img
+                    src="luxury-hero.png"
+                    alt="LUXEVA New Arrival"
+                >
 
                 <div class="product-info">
-                    <h3>Celeste</h3>
-                    <p>₹52,000</p>
+
+                    <span>NEW ARRIVAL</span>
+
+                    <h3>Étoile</h3>
+
+                    <p>Italian Calfskin</p>
+
+                    <p class="product-price">
+                        ₹1,42,000
+                    </p>
+
                 </div>
 
             </div>
 
 
-            <div class="product">
+            <div class="product reveal">
 
-                <div class="product-tag">
-                    BESTSELLER
-                </div>
-
-                <div class="product-image">
-                    <img
-                        src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85"
-                        alt="Luxury handbag"
-                    >
-                </div>
+                <img
+                    src="luxury-hero.png"
+                    alt="LUXEVA Limited Edition"
+                >
 
                 <div class="product-info">
-                    <h3>Isadora</h3>
-                    <p>₹61,500</p>
+
+                    <span>LIMITED EDITION</span>
+
+                    <h3>Riviera</h3>
+
+                    <p>Hand Finished Leather</p>
+
+                    <p class="product-price">
+                        ₹2,15,000
+                    </p>
+
                 </div>
 
             </div>
 
 
-            <div class="product">
+            <div class="product reveal">
 
-                <div class="product-image">
-                    <img
-                        src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=900&q=85"
-                        alt="Luxury handbag"
-                    >
-                </div>
+                <img
+                    src="luxury-hero.png"
+                    alt="LUXEVA Bespoke Collection"
+                >
 
                 <div class="product-info">
-                    <h3>Serena</h3>
-                    <p>₹55,000</p>
+
+                    <span>BESPOKE</span>
+
+                    <h3>Atelier No.01</h3>
+
+                    <p>Made-to-Order Collection</p>
+
+                    <p class="product-price">
+                        ₹3,25,000
+                    </p>
+
                 </div>
 
             </div>
@@ -799,47 +1179,150 @@
     </section>
 
 
-    <!-- =========================
-         STORY
-    ========================== -->
+    <!-- FUTURE OF LUXURY -->
 
-    <section id="story">
+    <section class="future" id="future">
 
-        <div class="story">
+        <div class="future-container">
 
-            <div class="story-image">
+            <div class="future-text reveal">
 
-                <img
-                    src="https://images.unsplash.com/photo-1612902456551-333ac5afa26e?auto=format&fit=crop&w=1200&q=85"
-                    alt="Luxury fashion craftsmanship"
-                >
-
-            </div>
-
-            <div class="story-content">
-
-                <span>Our Philosophy</span>
+                <span>
+                    The Future of Luxury
+                </span>
 
                 <h2>
-                    Beauty is<br>
-                    in the details.
+                    Experience Luxury
+                    Like Never Before.
                 </h2>
 
                 <p>
-                    ÉLARA was born from a simple belief — luxury should
-                    feel personal. Every silhouette is thoughtfully
-                    designed and meticulously crafted using exceptional
-                    materials and timeless techniques.
+
+                    LUXEVA combines artificial intelligence,
+                    immersive 3D technology and augmented reality
+                    to create an entirely new shopping experience.
+
                 </p>
 
-                <p style="margin-top:20px;">
-                    From the first sketch to the final stitch, our
-                    artisans dedicate themselves to creating pieces
-                    that transcend seasons.
+
+                <div class="features">
+
+                    <div class="feature">
+
+                        <strong>AI</strong>
+
+                        <span>
+                            PERSONALIZED
+                            RECOMMENDATIONS
+                        </span>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <strong>AR</strong>
+
+                        <span>
+                            VIRTUAL
+                            TRY-ON
+                        </span>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <strong>3D</strong>
+
+                        <span>
+                            IMMERSIVE
+                            VIEW
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <br>
+
+                <a href="#" class="btn btn-gold">
+                    Explore Experience →
+                </a>
+
+            </div>
+
+
+            <div class="product-stage reveal">
+
+                <div class="stage-card" id="stageCard">
+
+                    <img
+                        src="luxury-hero.png"
+                        alt="LUXEVA 3D Experience"
+                    >
+
+                    <div class="scan-ring"></div>
+
+                    <div class="scan-text">
+                        360° DIGITAL EXPERIENCE
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STORY -->
+
+    <section id="story">
+
+        <div class="story reveal">
+
+            <div class="story-image"></div>
+
+
+            <div class="story-content">
+
+                <span>
+                    Heritage & Craftsmanship
+                </span>
+
+                <h2>
+                    Handcrafted
+                    by Masters.
+                </h2>
+
+                <p>
+
+                    Every LUXEVA piece is a fusion of traditional
+                    European craftsmanship and modern innovation.
+
+                    From the first cut of leather to the final
+                    hand-polished detail, every stage is carefully
+                    inspected by our master artisans.
+
                 </p>
 
-                <a href="#" class="btn btn-primary">
-                    Our Story
+                <br>
+
+                <p>
+
+                    The result is not simply a handbag.
+
+                    It is a piece of art designed to become part
+                    of your story.
+
+                </p>
+
+                <br>
+
+                <a href="#" class="btn btn-outline">
+                    Discover Our Atelier →
                 </a>
 
             </div>
@@ -849,93 +1332,31 @@
     </section>
 
 
-    <!-- =========================
-         CRAFTSMANSHIP
-    ========================== -->
+    <!-- DIGITAL AUTHENTICITY -->
 
-    <section class="craft" id="craft">
+    <section class="passport">
 
-        <div class="section-heading">
+        <div class="passport-box reveal">
 
-            <span>The ÉLARA Standard</span>
-
-            <h2>Made With Intention</h2>
-
-        </div>
-
-        <div class="craft-grid">
-
-            <div class="craft-item">
-
-                <div class="craft-number">
-                    01
-                </div>
-
-                <h3>Exceptional Leather</h3>
-
-                <p>
-                    Carefully selected premium leather chosen for
-                    its softness, durability and ability to develop
-                    character over time.
-                </p>
-
+            <div class="eyebrow">
+                LUXEVA DIGITAL PASSPORT
             </div>
-
-
-            <div class="craft-item">
-
-                <div class="craft-number">
-                    02
-                </div>
-
-                <h3>Handcrafted</h3>
-
-                <p>
-                    Each piece passes through the hands of skilled
-                    artisans who bring decades of experience to
-                    every stitch and detail.
-                </p>
-
-            </div>
-
-
-            <div class="craft-item">
-
-                <div class="craft-number">
-                    03
-                </div>
-
-                <h3>Timeless Design</h3>
-
-                <p>
-                    Designed beyond seasonal trends, our silhouettes
-                    are created to remain elegant for years to come.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         BANNER
-    ========================== -->
-
-    <section class="banner">
-
-        <div class="banner-content">
-
-            <span>ÉLARA PRIVÉ</span>
 
             <h2>
-                Luxury,<br>
-                Reimagined.
+                Your Bag.
+                Your Identity.
             </h2>
 
-            <a href="#collection" class="btn btn-primary">
-                Shop Now
+            <p>
+
+                Every LUXEVA creation comes with a unique
+                digital certificate that verifies authenticity,
+                ownership and product history.
+
+            </p>
+
+            <a href="#" class="btn btn-gold">
+                Verify Your Bag →
             </a>
 
         </div>
@@ -943,55 +1364,71 @@
     </section>
 
 
-    <!-- =========================
-         NEWSLETTER
-    ========================== -->
+    <!-- NEWSLETTER -->
 
     <section class="newsletter" id="contact">
 
-        <h2>
-            Enter the World of ÉLARA
-        </h2>
+        <div class="reveal">
 
-        <p>
-            Subscribe to receive private invitations, collection
-            previews and stories from the world of ÉLARA.
-        </p>
+            <div class="eyebrow">
+                Private Access
+            </div>
 
-        <form class="newsletter-form" onsubmit="subscribe(event)">
+            <h2>
+                Enter the World of LUXEVA.
+            </h2>
 
-            <input
-                type="email"
-                placeholder="Your email address"
-                required
+            <p>
+
+                Receive private collection previews,
+                exclusive invitations and stories from
+                the world of LUXEVA.
+
+            </p>
+
+
+            <form
+                class="newsletter-form"
+                onsubmit="subscribe(event)"
             >
 
-            <button type="submit">
-                Subscribe
-            </button>
+                <input
+                    type="email"
+                    placeholder="Your email address"
+                    required
+                >
 
-        </form>
+                <button>
+                    JOIN →
+                </button>
+
+            </form>
+
+        </div>
 
     </section>
 
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
+    <!-- FOOTER -->
 
     <footer>
 
         <div class="footer-grid">
 
-            <div class="footer-brand">
+            <div>
 
                 <div class="logo">
-                    ÉLARA
+                    LUXEVA
+
+                    <small>PARIS</small>
                 </div>
 
-                <p>
-                    Contemporary luxury handbags crafted with
-                    intention, artistry and timeless elegance.
+                <p class="footer-description">
+
+                    A new expression of luxury where
+                    timeless craftsmanship meets
+                    intelligent technology.
+
                 </p>
 
             </div>
@@ -1002,10 +1439,31 @@
                 <h4>Explore</h4>
 
                 <ul>
-                    <li><a href="#collection">Collection</a></li>
-                    <li><a href="#">New Arrivals</a></li>
-                    <li><a href="#">Bestsellers</a></li>
-                    <li><a href="#">Gift Cards</a></li>
+
+                    <li>
+                        <a href="#collection">
+                            Collections
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            New Arrivals
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Bespoke
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Gift Cards
+                        </a>
+                    </li>
+
                 </ul>
 
             </div>
@@ -1016,10 +1474,31 @@
                 <h4>Client Care</h4>
 
                 <ul>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Shipping & Returns</a></li>
-                    <li><a href="#">Care Guide</a></li>
-                    <li><a href="#">FAQ</a></li>
+
+                    <li>
+                        <a href="#">
+                            Contact
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Shipping
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Returns
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Care Guide
+                        </a>
+                    </li>
+
                 </ul>
 
             </div>
@@ -1030,10 +1509,31 @@
                 <h4>Follow</h4>
 
                 <ul>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">Pinterest</a></li>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">YouTube</a></li>
+
+                    <li>
+                        <a href="#">
+                            Instagram
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Pinterest
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Facebook
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            YouTube
+                        </a>
+                    </li>
+
                 </ul>
 
             </div>
@@ -1042,69 +1542,187 @@
 
 
         <div class="copyright">
-            © 2026 ÉLARA. ALL RIGHTS RESERVED.
+
+            © 2026 LUXEVA PARIS · ALL RIGHTS RESERVED
+
         </div>
 
     </footer>
 
 
-    <!-- =========================
-         JAVASCRIPT
-    ========================== -->
-
     <script>
 
-        // Navbar background on scroll
+        /* =========================
+           NAVBAR
+        ========================= */
 
-        window.addEventListener("scroll", function () {
+        window.addEventListener("scroll", () => {
 
-            const header = document.getElementById("header");
+            const header =
+                document.getElementById("header");
 
             if (window.scrollY > 60) {
+
                 header.classList.add("scrolled");
+
             } else {
+
                 header.classList.remove("scrolled");
+
             }
 
         });
 
 
-        // Newsletter
+        /* =========================
+           CURSOR
+        ========================= */
+
+        const cursor =
+            document.querySelector(".cursor-glow");
+
+        document.addEventListener("mousemove", e => {
+
+            cursor.style.left = e.clientX + "px";
+
+            cursor.style.top = e.clientY + "px";
+
+        });
+
+
+        /* =========================
+           SCROLL REVEAL
+        ========================= */
+
+        const observer =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add("active");
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: .15
+                }
+            );
+
+
+        document
+            .querySelectorAll(".reveal")
+            .forEach(el => observer.observe(el));
+
+
+        /* =========================
+           3D PRODUCT EFFECT
+        ========================= */
+
+        const stage =
+            document.getElementById("stageCard");
+
+        stage.addEventListener("mousemove", e => {
+
+            const rect =
+                stage.getBoundingClientRect();
+
+            const x =
+                e.clientX - rect.left;
+
+            const y =
+                e.clientY - rect.top;
+
+            const rotateY =
+                ((x / rect.width) - .5) * 15;
+
+            const rotateX =
+                ((y / rect.height) - .5) * -15;
+
+            stage.style.transform =
+                `rotateX(${rotateX}deg)
+                 rotateY(${rotateY}deg)
+                 scale(1.02)`;
+
+        });
+
+
+        stage.addEventListener("mouseleave", () => {
+
+            stage.style.transform =
+                "rotateX(0) rotateY(0) scale(1)";
+
+        });
+
+
+        /* =========================
+           PRODUCT TILT
+        ========================= */
+
+        document
+            .querySelectorAll(".product")
+            .forEach(card => {
+
+                card.addEventListener("mousemove", e => {
+
+                    const rect =
+                        card.getBoundingClientRect();
+
+                    const x =
+                        e.clientX - rect.left;
+
+                    const y =
+                        e.clientY - rect.top;
+
+                    const rotateY =
+                        ((x / rect.width) - .5) * 5;
+
+                    const rotateX =
+                        ((y / rect.height) - .5) * -5;
+
+                    card.style.transform =
+                        `perspective(900px)
+                         rotateX(${rotateX}deg)
+                         rotateY(${rotateY}deg)`;
+
+                });
+
+
+                card.addEventListener("mouseleave", () => {
+
+                    card.style.transform =
+                        "perspective(900px) rotateX(0) rotateY(0)";
+
+                });
+
+            });
+
+
+        /* =========================
+           NEWSLETTER
+        ========================= */
 
         function subscribe(event) {
 
             event.preventDefault();
 
-            const email = event.target.querySelector("input").value;
+            const email =
+                event.target.querySelector("input").value;
 
             alert(
-                "Thank you for joining ÉLARA.\n\n" +
+                "Welcome to LUXEVA.\n\n" +
                 email +
-                " has been added to our private list."
+                " has been added to our private access list."
             );
 
             event.target.reset();
 
         }
-
-
-        // Product click interaction
-
-        document.querySelectorAll(".product").forEach(function(product) {
-
-            product.addEventListener("click", function() {
-
-                const name =
-                    product.querySelector("h3").textContent;
-
-                alert(
-                    name +
-                    " — Product page coming soon."
-                );
-
-            });
-
-        });
 
     </script>
 
