@@ -1,1134 +1,1357 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>TAURI — Multidisciplinary Product Design Studio</title>
+<meta charset="UTF-8">
 
-  <meta
-    name="description"
-    content="TAURI is a multidisciplinary product design studio creating products across technology, mobility, furniture, lifestyle and emerging industries."
-  />
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>TAURI — Multidisciplinary Product Design</title>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
+<meta
+name="description"
+content="TAURI is a multidisciplinary product design studio creating products, experiences and visual systems across industries."
+>
 
-  <style>
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
 
-    /* =====================================================
-       ROOT
-    ===================================================== */
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
 
-    :root {
-      --black: #050505;
-      --dark: #0a0a0a;
-      --gold: #d8bd83;
-      --gold-light: #f0d9a5;
-      --white: #f5f1e8;
-      --muted: #96928a;
-      --line: rgba(255,255,255,.13);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: "DM Sans", sans-serif;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      display: block;
-      width: 100%;
-    }
+<link
+href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
 
 
-    /* =====================================================
-       INTRO LOGO SCREEN
-    ===================================================== */
+<style>
 
-    .intro {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
+/* =========================================================
+   RESET
+========================================================= */
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-      background:
-        radial-gradient(
-          circle at center,
-          rgba(216,189,131,.08),
-          transparent 35%
-        ),
-        #020202;
+html {
+    scroll-behavior: smooth;
+}
 
-      transition:
-        opacity 1.3s ease,
-        visibility 1.3s ease;
-    }
+body {
+    background: #f4f1ea;
+    color: #111;
+    font-family: "DM Sans", sans-serif;
+    overflow-x: hidden;
+}
 
-    .intro.hide {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
+a {
+    text-decoration: none;
+    color: inherit;
+}
 
-    .intro-stars {
-      position: absolute;
-      inset: 0;
+img {
+    width: 100%;
+    display: block;
+}
 
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,.55) 1px, transparent 1.5px),
-        radial-gradient(circle, rgba(216,189,131,.4) 1px, transparent 1.5px);
 
-      background-size:
-        120px 120px,
-        190px 190px;
+/* =========================================================
+   VARIABLES
+========================================================= */
 
-      background-position:
-        20px 30px,
-        80px 100px;
+:root {
 
-      opacity: .35;
-    }
+    --cream: #f4f1ea;
+    --black: #111111;
+    --dark: #171717;
 
-    .intro-logo {
-      position: relative;
-      z-index: 2;
+    --grey: #77736c;
 
-      text-align: center;
+    --line: rgba(0,0,0,.14);
 
-      animation:
-        logoReveal 1.8s
-        cubic-bezier(.16,1,.3,1)
-        forwards;
-    }
+    --gold: #b99a61;
 
-    /*
-       Hybrid Taurus + Capricorn symbol
-    */
+    --max: 1450px;
+}
 
-    .hybrid-symbol {
-      width: 100px;
-      height: 100px;
 
-      margin: auto;
+/* =========================================================
+   LOADING / LOGO INTRO
+========================================================= */
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
+#intro {
 
-      border: 1px solid rgba(216,189,131,.55);
-      border-radius: 50%;
+    position: fixed;
 
-      color: var(--gold-light);
+    inset: 0;
 
-      font-family: Georgia, serif;
-      font-size: 36px;
+    z-index: 99999;
 
-      letter-spacing: -8px;
+    background: #050505;
 
-      padding-right: 8px;
+    display: flex;
 
-      box-shadow:
-        0 0 50px rgba(216,189,131,.12),
-        inset 0 0 30px rgba(216,189,131,.05);
-    }
+    justify-content: center;
 
-    .intro-name {
-      margin-top: 28px;
+    align-items: center;
 
-      font-family: "Manrope", sans-serif;
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
 
-      font-size: clamp(48px, 8vw, 90px);
+#intro.hide {
 
-      font-weight: 500;
+    opacity: 0;
 
-      letter-spacing: .34em;
+    visibility: hidden;
 
-      padding-left: .34em;
+    pointer-events: none;
+}
 
-      color: var(--white);
-    }
 
-    .intro-tagline {
-      margin-top: 17px;
+.intro-inner {
 
-      font-size: 10px;
+    text-align: center;
 
-      letter-spacing: .35em;
+    animation:
+        introReveal 1.7s
+        cubic-bezier(.16,1,.3,1);
+}
 
-      text-transform: uppercase;
 
-      color: var(--gold);
-    }
+.intro-symbol {
 
-    @keyframes logoReveal {
+    width: 90px;
+    height: 90px;
 
-      0% {
+    border:
+        1px solid
+        rgba(210,185,130,.55);
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin: auto;
+
+    color: #d9bd83;
+
+    font-family: Georgia, serif;
+
+    font-size: 32px;
+
+    letter-spacing: -7px;
+
+    padding-right: 7px;
+}
+
+
+.intro-name {
+
+    color: #f4f1ea;
+
+    font-family: "Manrope";
+
+    font-size:
+        clamp(48px,8vw,90px);
+
+    letter-spacing: .35em;
+
+    padding-left: .35em;
+
+    margin-top: 25px;
+}
+
+
+.intro-sub {
+
+    color: #c9b98f;
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .32em;
+
+    margin-top: 15px;
+}
+
+
+@keyframes introReveal {
+
+    from {
+
         opacity: 0;
+
         transform:
-          translateY(35px)
-          scale(.92);
+            translateY(35px)
+            scale(.93);
 
-        filter: blur(12px);
-      }
+        filter: blur(10px);
+    }
 
-      100% {
+    to {
+
         opacity: 1;
+
         transform:
-          translateY(0)
-          scale(1);
+            translateY(0)
+            scale(1);
 
         filter: blur(0);
-      }
+    }
+}
 
+
+/* =========================================================
+   SITE
+========================================================= */
+
+#site {
+
+    opacity: 0;
+
+    transition:
+        opacity 1.2s ease;
+}
+
+#site.show {
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+header {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    z-index: 1000;
+
+    padding:
+        24px 5vw;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    transition:
+        .35s ease;
+}
+
+
+header.scrolled {
+
+    background:
+        rgba(244,241,234,.88);
+
+    backdrop-filter:
+        blur(15px);
+
+    border-bottom:
+        1px solid var(--line);
+}
+
+
+.logo {
+
+    font-family: "Manrope";
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    letter-spacing: .25em;
+
+    padding-left: .25em;
+}
+
+
+.navigation {
+
+    display: flex;
+
+    gap: 35px;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .17em;
+}
+
+
+.navigation a {
+
+    transition: .25s;
+}
+
+
+.navigation a:hover {
+
+    color: var(--gold);
+}
+
+
+.nav-button {
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .16em;
+}
+
+
+.nav-button span {
+
+    display: inline-block;
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--gold);
+
+    margin-right: 8px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    min-height: 100vh;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    align-items: center;
+
+    padding:
+        120px 5vw 70px;
+
+    gap: 70px;
+
+    background:
+        #f4f1ea;
+}
+
+
+.hero-left {
+
+    max-width: 800px;
+}
+
+
+.hero-small {
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .25em;
+
+    color: var(--grey);
+
+    margin-bottom: 35px;
+}
+
+
+.hero-title {
+
+    font-family: "Manrope";
+
+    font-size:
+        clamp(
+            65px,
+            8.5vw,
+            145px
+        );
+
+    font-weight: 500;
+
+    line-height: .82;
+
+    letter-spacing: -.085em;
+}
+
+
+.hero-title span {
+
+    color: #9d998f;
+}
+
+
+.hero-description {
+
+    max-width: 490px;
+
+    margin-top: 45px;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    color: #68645e;
+}
+
+
+.hero-button {
+
+    display: inline-block;
+
+    margin-top: 35px;
+
+    background: #111;
+
+    color: white;
+
+    padding:
+        16px 25px;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .18em;
+
+    transition: .3s;
+}
+
+
+.hero-button:hover {
+
+    background: var(--gold);
+
+    color: #111;
+}
+
+
+.hero-right {
+
+    position: relative;
+
+    height: 650px;
+
+    overflow: hidden;
+
+    background: #080808;
+}
+
+
+.hero-right img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 1.4s
+        cubic-bezier(.16,1,.3,1);
+}
+
+
+.hero-right:hover img {
+
+    transform:
+        scale(1.035);
+}
+
+
+/* =========================================================
+   MARQUEE
+========================================================= */
+
+.marquee {
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    background: #111;
+
+    color: #f4f1ea;
+
+    padding:
+        20px 0;
+}
+
+
+.marquee-track {
+
+    display: inline-block;
+
+    animation:
+        marquee 25s linear infinite;
+}
+
+
+.marquee span {
+
+    margin:
+        0 35px;
+
+    font-family: "Manrope";
+
+    font-size: 13px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .25em;
+}
+
+
+@keyframes marquee {
+
+    from {
+        transform: translateX(0);
     }
 
-
-    /* =====================================================
-       WEBSITE
-    ===================================================== */
-
-    .site {
-      opacity: 0;
-
-      transition:
-        opacity 1.5s ease;
+    to {
+        transform: translateX(-50%);
     }
 
-    .site.show {
-      opacity: 1;
+}
+
+
+/* =========================================================
+   INTRO STATEMENT
+========================================================= */
+
+.section {
+
+    padding:
+        150px 5vw;
+}
+
+
+.section-label {
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .25em;
+
+    color: var(--grey);
+}
+
+
+.big-statement {
+
+    max-width: 1100px;
+
+    margin-top: 35px;
+
+    font-family: "Manrope";
+
+    font-size:
+        clamp(
+            42px,
+            6.5vw,
+            95px
+        );
+
+    line-height: .97;
+
+    letter-spacing: -.075em;
+}
+
+
+.big-statement span {
+
+    color: #99958d;
+}
+
+
+/* =========================================================
+   WORK
+========================================================= */
+
+.work-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1.4fr
+        .6fr;
+
+    gap: 25px;
+
+    margin-top: 80px;
+}
+
+
+.work-card {
+
+    position: relative;
+
+    height: 620px;
+
+    overflow: hidden;
+
+    background: #ddd;
+}
+
+
+.work-card.small {
+
+    height: 470px;
+
+    margin-top: 150px;
+}
+
+
+.work-card img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 1.2s
+        cubic-bezier(.16,1,.3,1);
+}
+
+
+.work-card:hover img {
+
+    transform: scale(1.06);
+}
+
+
+.work-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent 55%,
+            rgba(0,0,0,.7)
+        );
+}
+
+
+.work-info {
+
+    position: absolute;
+
+    left: 30px;
+    right: 30px;
+    bottom: 25px;
+
+    color: white;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: end;
+}
+
+
+.work-name {
+
+    font-family: "Manrope";
+
+    font-size: 30px;
+}
+
+
+.work-category {
+
+    font-size: 9px;
+
+    letter-spacing: .18em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   EXPERTISE
+========================================================= */
+
+.expertise {
+
+    background: #111;
+
+    color: white;
+}
+
+
+.expertise .section-label {
+
+    color: #aaa;
+}
+
+
+.expertise-list {
+
+    margin-top: 75px;
+}
+
+
+.expertise-row {
+
+    display: grid;
+
+    grid-template-columns:
+        80px
+        1fr
+        1fr;
+
+    gap: 30px;
+
+    padding:
+        30px 0;
+
+    border-top:
+        1px solid rgba(255,255,255,.15);
+}
+
+
+.expertise-row:last-child {
+
+    border-bottom:
+        1px solid rgba(255,255,255,.15);
+}
+
+
+.expertise-number {
+
+    color: #777;
+
+    font-size: 11px;
+}
+
+
+.expertise-name {
+
+    font-family: "Manrope";
+
+    font-size:
+        clamp(27px,3.5vw,48px);
+
+    letter-spacing: -.05em;
+}
+
+
+.expertise-description {
+
+    max-width: 480px;
+
+    color: #999;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   ZODIAC
+========================================================= */
+
+.zodiac {
+
+    padding:
+        170px 5vw;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(190,158,91,.12),
+            transparent 40%
+        ),
+        #f4f1ea;
+}
+
+
+.zodiac-symbol {
+
+    font-family: Georgia, serif;
+
+    color: var(--gold);
+
+    font-size: 65px;
+
+    letter-spacing: .08em;
+}
+
+
+.zodiac h2 {
+
+    font-family: "Manrope";
+
+    font-size:
+        clamp(
+            45px,
+            7vw,
+            95px
+        );
+
+    line-height: .9;
+
+    letter-spacing: -.07em;
+
+    margin-top: 30px;
+}
+
+
+.zodiac p {
+
+    max-width: 650px;
+
+    margin:
+        30px auto 0;
+
+    color: var(--grey);
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   PROCESS
+========================================================= */
+
+.process-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 1px;
+
+    margin-top: 80px;
+
+    background: var(--line);
+}
+
+
+.process-item {
+
+    background: var(--cream);
+
+    padding:
+        40px 30px;
+
+    min-height: 280px;
+}
+
+
+.process-number {
+
+    color: var(--grey);
+
+    font-size: 11px;
+}
+
+
+.process-title {
+
+    font-family: "Manrope";
+
+    font-size: 32px;
+
+    margin-top: 90px;
+
+    letter-spacing: -.05em;
+}
+
+
+.process-text {
+
+    color: var(--grey);
+
+    line-height: 1.6;
+
+    margin-top: 15px;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta {
+
+    padding:
+        180px 5vw;
+
+    background: #111;
+
+    color: white;
+
+    text-align: center;
+}
+
+
+.cta .section-label {
+
+    color: var(--gold);
+}
+
+
+.cta-title {
+
+    font-family: "Manrope";
+
+    font-size:
+        clamp(
+            65px,
+            12vw,
+            170px
+        );
+
+    line-height: .8;
+
+    letter-spacing: -.09em;
+
+    margin-top: 35px;
+}
+
+
+.cta-title span {
+
+    color: #6d6a65;
+}
+
+
+.cta-button {
+
+    display: inline-block;
+
+    margin-top: 60px;
+
+    padding:
+        17px 28px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.3);
+
+    border-radius: 100px;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .2em;
+
+    transition: .3s;
+}
+
+
+.cta-button:hover {
+
+    background: var(--gold);
+
+    color: #111;
+
+    border-color: var(--gold);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    background: #111;
+
+    color: #777;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.12);
+
+    padding:
+        25px 5vw;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 9px;
+
+    letter-spacing: .16em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:900px) {
+
+    .navigation {
+
+        display: none;
     }
 
-
-    /* =====================================================
-       NAVIGATION
-    ===================================================== */
-
-    .nav {
-
-      position: fixed;
-
-      top: 0;
-      left: 0;
-
-      width: 100%;
-
-      z-index: 100;
-
-      padding:
-        25px
-        5vw;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      border-bottom:
-        1px solid transparent;
-
-      transition:
-        .4s ease;
-    }
-
-    .nav.scrolled {
-
-      background:
-        rgba(5,5,5,.72);
-
-      backdrop-filter:
-        blur(18px);
-
-      border-color:
-        var(--line);
-    }
-
-    .logo {
-
-      font-family: "Manrope";
-
-      font-size: 18px;
-
-      font-weight: 600;
-
-      letter-spacing: .28em;
-
-      padding-left: .28em;
-    }
-
-    .nav-links {
-
-      display: flex;
-
-      gap: 34px;
-
-      font-size: 10px;
-
-      text-transform: uppercase;
-
-      letter-spacing: .18em;
-    }
-
-    .nav-links a {
-
-      opacity: .65;
-
-      transition: .3s ease;
-    }
-
-    .nav-links a:hover {
-
-      opacity: 1;
-
-      color: var(--gold);
-    }
-
-    .nav-contact {
-
-      font-size: 10px;
-
-      text-transform: uppercase;
-
-      letter-spacing: .16em;
-
-      color: var(--gold);
-    }
-
-    .nav-contact::before {
-
-      content: "";
-
-      display: inline-block;
-
-      width: 6px;
-      height: 6px;
-
-      border-radius: 50%;
-
-      background: var(--gold);
-
-      margin-right: 10px;
-    }
-
-
-    /* =====================================================
-       HERO
-    ===================================================== */
 
     .hero {
 
-      position: relative;
+        grid-template-columns: 1fr;
 
-      width: 100%;
-
-      height: 100svh;
-
-      min-height: 680px;
-
-      overflow: hidden;
-
-      display: flex;
-
-      align-items: flex-end;
-
-      background: #020202;
-    }
-
-    .hero-image {
-
-      position: absolute;
-
-      inset: 0;
-
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-
-      object-position: center;
-
-      opacity: .98;
-    }
-
-    .hero-overlay {
-
-      position: absolute;
-
-      inset: 0;
-
-      background:
-        linear-gradient(
-          to bottom,
-          rgba(0,0,0,.05),
-          transparent 50%,
-          rgba(0,0,0,.45)
-        );
-    }
-
-    .hero-bottom {
-
-      position: relative;
-
-      z-index: 2;
-
-      width: 100%;
-
-      padding:
-        0
-        5vw
-        38px;
-
-      display: flex;
-
-      align-items: flex-end;
-
-      justify-content: space-between;
-    }
-
-    .hero-label {
-
-      font-size: 9px;
-
-      letter-spacing: .28em;
-
-      text-transform: uppercase;
-
-      color: #c5c0b5;
-    }
-
-    .scroll {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 14px;
-
-      font-size: 9px;
-
-      letter-spacing: .25em;
-
-      text-transform: uppercase;
-
-      color: #c5c0b5;
-    }
-
-    .scroll-line {
-
-      width: 65px;
-
-      height: 1px;
-
-      background:
-        rgba(255,255,255,.45);
+        padding-top: 130px;
     }
 
 
-    /* =====================================================
-       GENERAL SECTIONS
-    ===================================================== */
+    .hero-right {
 
-    .section {
-
-      padding:
-        150px
-        5vw;
-    }
-
-    .section-label {
-
-      font-size: 10px;
-
-      text-transform: uppercase;
-
-      letter-spacing: .25em;
-
-      color: var(--gold);
+        height: 480px;
     }
 
 
-    /* =====================================================
-       INTRO STATEMENT
-    ===================================================== */
+    .work-grid {
 
-    .statement {
-
-      max-width: 1050px;
-
-      margin-top: 38px;
-
-      font-family: "Manrope";
-
-      font-size:
-        clamp(
-          40px,
-          6vw,
-          88px
-        );
-
-      line-height: .98;
-
-      letter-spacing: -.065em;
-    }
-
-    .statement span {
-
-      color: #68655f;
+        grid-template-columns: 1fr;
     }
 
 
-    /* =====================================================
-       PROJECTS
-    ===================================================== */
+    .work-card {
 
-    .projects {
-
-      margin-top: 80px;
-
-      display: grid;
-
-      grid-template-columns:
-        1.25fr
-        .75fr;
-
-      gap: 25px;
-    }
-
-    .project {
-
-      position: relative;
-
-      min-height: 570px;
-
-      overflow: hidden;
-
-      background: #111;
-    }
-
-    .project img {
-
-      height: 100%;
-
-      object-fit: cover;
-
-      transition:
-        transform
-        1.2s
-        cubic-bezier(.16,1,.3,1);
-
-      filter: saturate(.75);
-    }
-
-    .project:hover img {
-
-      transform:
-        scale(1.05);
-    }
-
-    .project-info {
-
-      position: absolute;
-
-      left: 28px;
-      right: 28px;
-      bottom: 25px;
-
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: flex-end;
-
-      text-shadow:
-        0 2px 20px #000;
-    }
-
-    .project-name {
-
-      font-family: "Manrope";
-
-      font-size: 28px;
-    }
-
-    .project-type {
-
-      font-size: 9px;
-
-      letter-spacing: .2em;
-
-      text-transform: uppercase;
+        height: 480px;
     }
 
 
-    /* =====================================================
-       SERVICES
-    ===================================================== */
+    .work-card.small {
 
-    .services {
+        height: 400px;
 
-      background:
-        #0b0b0b;
-    }
-
-    .service-list {
-
-      margin-top: 75px;
-    }
-
-    .service {
-
-      display: grid;
-
-      grid-template-columns:
-        80px
-        1.1fr
-        1fr;
-
-      gap: 30px;
-
-      padding: 32px 0;
-
-      border-top:
-        1px solid var(--line);
-    }
-
-    .service:last-child {
-
-      border-bottom:
-        1px solid var(--line);
-    }
-
-    .service-number {
-
-      color: #66635d;
-
-      font-size: 11px;
-    }
-
-    .service-title {
-
-      font-family: "Manrope";
-
-      font-size:
-        clamp(
-          27px,
-          3vw,
-          43px
-        );
-
-      font-weight: 500;
-
-      letter-spacing: -.04em;
-    }
-
-    .service-description {
-
-      max-width: 480px;
-
-      color: var(--muted);
-
-      line-height: 1.65;
+        margin-top: 0;
     }
 
 
-    /* =====================================================
-       ZODIAC BRAND STORY
-    ===================================================== */
+    .expertise-row {
 
-    .zodiac {
-
-      padding:
-        160px
-        5vw;
-
-      text-align: center;
-
-      background:
-        radial-gradient(
-          circle at center,
-          rgba(216,189,131,.09),
-          transparent 38%
-        ),
-        #050505;
-    }
-
-    .zodiac-symbol {
-
-      font-family: Georgia, serif;
-
-      font-size: 70px;
-
-      color: var(--gold);
-
-      letter-spacing: .1em;
-    }
-
-    .zodiac-title {
-
-      margin-top: 30px;
-
-      font-family: "Manrope";
-
-      font-size:
-        clamp(
-          40px,
-          6vw,
-          78px
-        );
-
-      line-height: .95;
-
-      letter-spacing: -.065em;
-    }
-
-    .zodiac-description {
-
-      max-width: 620px;
-
-      margin:
-        30px
-        auto
-        0;
-
-      color: var(--muted);
-
-      line-height: 1.7;
+        grid-template-columns:
+            40px
+            1fr;
     }
 
 
-    /* =====================================================
-       PROCESS
-    ===================================================== */
+    .expertise-description {
 
-    .process-title {
-
-      max-width: 1000px;
-
-      margin-top: 35px;
-
-      font-family: "Manrope";
-
-      font-size:
-        clamp(
-          42px,
-          6vw,
-          90px
-        );
-
-      line-height: .95;
-
-      letter-spacing: -.07em;
-    }
-
-    .process-title span {
-
-      color: #68655f;
+        grid-column: 2;
     }
 
 
-    /* =====================================================
-       CTA
-    ===================================================== */
+    .process-grid {
 
-    .cta {
-
-      padding:
-        180px
-        5vw;
-
-      text-align: center;
+        grid-template-columns: 1fr;
     }
 
-    .cta-title {
-
-      margin-top: 30px;
-
-      font-family: "Manrope";
-
-      font-size:
-        clamp(
-          60px,
-          11vw,
-          160px
-        );
-
-      line-height: .83;
-
-      letter-spacing: -.09em;
-    }
-
-    .cta-title span {
-
-      color: #68655f;
-    }
-
-    .cta-button {
-
-      display: inline-block;
-
-      margin-top: 60px;
-
-      padding:
-        17px
-        28px;
-
-      border:
-        1px solid var(--line);
-
-      border-radius: 100px;
-
-      font-size: 10px;
-
-      letter-spacing: .2em;
-
-      text-transform: uppercase;
-
-      transition:
-        .3s ease;
-    }
-
-    .cta-button:hover {
-
-      background:
-        var(--gold);
-
-      border-color:
-        var(--gold);
-
-      color:
-        #050505;
-    }
-
-
-    /* =====================================================
-       FOOTER
-    ===================================================== */
 
     footer {
-
-      padding:
-        26px
-        5vw;
-
-      border-top:
-        1px solid var(--line);
-
-      display: flex;
-
-      justify-content: space-between;
-
-      color: #6e6b64;
-
-      font-size: 9px;
-
-      letter-spacing: .15em;
-
-      text-transform: uppercase;
-    }
-
-
-    /* =====================================================
-       MOBILE
-    ===================================================== */
-
-    @media(max-width: 800px) {
-
-      .nav {
-
-        padding:
-          20px
-          5vw;
-      }
-
-      .nav-links {
-
-        display: none;
-      }
-
-      .hero {
-
-        min-height: 620px;
-      }
-
-      .hero-image {
-
-        object-position:
-          center center;
-      }
-
-      .hero-bottom {
-
-        padding-bottom: 25px;
-      }
-
-      .section {
-
-        padding:
-          100px
-          5vw;
-      }
-
-      .projects {
-
-        grid-template-columns:
-          1fr;
-      }
-
-      .project {
-
-        min-height: 450px;
-      }
-
-      .service {
-
-        grid-template-columns:
-          35px
-          1fr;
-      }
-
-      .service-description {
-
-        grid-column:
-          2;
-      }
-
-      .zodiac {
-
-        padding:
-          110px
-          5vw;
-      }
-
-      .cta {
-
-        padding:
-          120px
-          5vw;
-      }
-
-      footer {
 
         flex-direction: column;
 
         gap: 15px;
-      }
-
     }
 
-  </style>
+}
+
+</style>
+
 </head>
 
 
 <body>
 
 
-  <!-- =====================================================
-       TAURI OPENING LOGO
-       THIS APPEARS BEFORE THE WEBSITE
-  ===================================================== -->
+<!-- ========================================================
+     TAURI INTRO
+========================================================= -->
 
-  <div class="intro" id="intro">
+<div id="intro">
 
-    <div class="intro-stars"></div>
+    <div class="intro-inner">
 
-    <div class="intro-logo">
+        <div class="intro-symbol">
+            ♉︎♑︎
+        </div>
 
-      <!-- Taurus + Capricorn -->
-      <div class="hybrid-symbol">
-        ♉︎♑︎
-      </div>
+        <div class="intro-name">
+            TAURI
+        </div>
 
-      <div class="intro-name">
-        TAURI
-      </div>
-
-      <div class="intro-tagline">
-        Multidisciplinary Product Design Studio
-      </div>
+        <div class="intro-sub">
+            Multidisciplinary Product Design Studio
+        </div>
 
     </div>
 
-  </div>
+</div>
 
 
 
-  <!-- =====================================================
-       WEBSITE
-  ===================================================== -->
+<!-- ========================================================
+     WEBSITE
+========================================================= -->
 
-  <div class="site" id="site">
+<div id="site">
 
 
-    <!-- NAVIGATION -->
+<!-- ========================================================
+     NAVIGATION
+========================================================= -->
 
-    <header class="nav" id="nav">
+<header id="header">
 
-      <a href="#" class="logo">
+    <a href="#" class="logo">
         TAURI
-      </a>
+    </a>
 
-      <nav class="nav-links">
+
+    <nav class="navigation">
 
         <a href="#work">
-          Work
+            Work
         </a>
 
-        <a href="#services">
-          Services
-        </a>
-
-        <a href="#about">
-          About
+        <a href="#expertise">
+            Expertise
         </a>
 
         <a href="#process">
-          Process
+            Process
+        </a>
+
+        <a href="#about">
+            About
         </a>
 
         <a href="#contact">
-          Contact
+            Contact
         </a>
 
-      </nav>
-
-      <a
-        href="mailto:hello@tauri.design"
-        class="nav-contact"
-      >
-        Let's collaborate
-      </a>
-
-    </header>
+    </nav>
 
 
-
-    <!-- =====================================================
-         HERO
-
-         YOUR GENERATED IMAGE IS USED HERE
-    ===================================================== -->
-
-    <section class="hero">
-
-      <img
-        class="hero-image"
-        src="tauri-zodiac-hero.png"
-        alt="TAURI Taurus Capricorn constellation"
-      />
-
-      <div class="hero-overlay"></div>
-
-      <div class="hero-bottom">
-
-        <div class="hero-label">
-          Taurus × Capricorn — The TAURI Origin
-        </div>
-
-        <div class="scroll">
-
-          <span class="scroll-line"></span>
-
-          Scroll to explore
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         ABOUT / INTRO
-    ===================================================== -->
-
-    <section
-      class="section"
-      id="about"
+    <a
+        href="#contact"
+        class="nav-button"
     >
 
-      <div class="section-label">
-        01 — The Studio
-      </div>
+        <span></span>
 
-      <h1 class="statement">
+        Start a project
 
-        We design across disciplines,
+    </a>
 
+</header>
+
+
+
+<!-- ========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+
+    <div class="hero-left">
+
+        <div class="hero-small">
+            Multidisciplinary Product Design Studio
+        </div>
+
+
+        <h1 class="hero-title">
+
+            WE MAKE
+
+            <br>
+
+            <span>
+                PRODUCTS
+            </span>
+
+            <br>
+
+            MATTER.
+
+        </h1>
+
+
+        <p class="hero-description">
+
+            TAURI is a multidisciplinary design studio
+            working across product, industrial design,
+            packaging, 3D visualization and brand
+            experiences.
+
+        </p>
+
+
+        <a
+            href="#work"
+            class="hero-button"
+        >
+
+            Explore our work →
+
+        </a>
+
+    </div>
+
+
+
+    <!-- YOUR ZODIAC IMAGE -->
+
+    <div class="hero-right">
+
+        <img
+            src="tauri-zodiac-hero.png"
+            alt="Taurus and Capricorn constellation — TAURI"
+        >
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ========================================================
+     MARQUEE
+========================================================= -->
+
+<div class="marquee">
+
+    <div class="marquee-track">
+
+        <span>Industrial Design</span>
+
+        <span>Product Design</span>
+
+        <span>3D Visualization</span>
+
+        <span>Packaging</span>
+
+        <span>Brand Experience</span>
+
+        <span>Industrial Design</span>
+
+        <span>Product Design</span>
+
+        <span>3D Visualization</span>
+
+        <span>Packaging</span>
+
+        <span>Brand Experience</span>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================================
+     INTRO
+========================================================= -->
+
+<section class="section" id="about">
+
+    <div class="section-label">
+        01 — About TAURI
+    </div>
+
+
+    <h2 class="big-statement">
+
+        We turn ideas into
         <span>
-          turning ideas into products
-          with character, clarity
-          and purpose.
+            physical products,
+            meaningful experiences
+            and visual worlds.
         </span>
 
-      </h1>
+    </h2>
 
-    </section>
-
-
-
-    <!-- =====================================================
-         WORK
-    ===================================================== -->
-
-    <section
-      class="section"
-      id="work"
-    >
-
-      <div class="section-label">
-        02 — Selected Work
-      </div>
+</section>
 
 
-      <div class="projects">
+
+<!-- ========================================================
+     WORK
+========================================================= -->
+
+<section class="section" id="work">
+
+    <div class="section-label">
+        02 — Recent Projects
+    </div>
+
+
+    <div class="work-grid">
 
 
         <!-- PROJECT 01 -->
 
-        <article class="project">
+        <article class="work-card">
 
-          <img
-            src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1600&q=90"
-            alt="Consumer technology product"
-          />
+            <img
+                src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1800&q=90"
+                alt="Consumer product design"
+            >
 
-          <div class="project-info">
+            <div class="work-overlay"></div>
 
-            <div class="project-name">
-              FORMA
+
+            <div class="work-info">
+
+                <div class="work-name">
+                    FORMA
+                </div>
+
+                <div class="work-category">
+                    Consumer Technology
+                </div>
+
             </div>
-
-            <div class="project-type">
-              Consumer Technology
-            </div>
-
-          </div>
 
         </article>
 
@@ -1136,344 +1359,540 @@
 
         <!-- PROJECT 02 -->
 
-        <article class="project">
+        <article class="work-card small">
 
-          <img
-            src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1400&q=90"
-            alt="Furniture design"
-          />
+            <img
+                src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1400&q=90"
+                alt="Furniture design"
+            >
 
-          <div class="project-info">
+            <div class="work-overlay"></div>
 
-            <div class="project-name">
-              ARC
+
+            <div class="work-info">
+
+                <div class="work-name">
+                    ARC
+                </div>
+
+                <div class="work-category">
+                    Furniture
+                </div>
+
             </div>
-
-            <div class="project-type">
-              Furniture
-            </div>
-
-          </div>
 
         </article>
 
 
-      </div>
+    </div>
 
-    </section>
-
-
-
-    <!-- =====================================================
-         SERVICES
-    ===================================================== -->
-
-    <section
-      class="section services"
-      id="services"
-    >
-
-      <div class="section-label">
-        03 — Capabilities
-      </div>
-
-
-      <div class="service-list">
-
-
-        <div class="service">
-
-          <div class="service-number">
-            01
-          </div>
-
-          <h3 class="service-title">
-            Industrial Design
-          </h3>
-
-          <p class="service-description">
-            Product form, ergonomics, CMF,
-            materials and user experience
-            translated into distinctive
-            physical products.
-          </p>
-
-        </div>
+</section>
 
 
 
-        <div class="service">
+<!-- ========================================================
+     EXPERTISE
+========================================================= -->
 
-          <div class="service-number">
-            02
-          </div>
+<section
+    class="section expertise"
+    id="expertise"
+>
 
-          <h3 class="service-title">
-            Product Development
-          </h3>
+    <div class="section-label">
+        03 — Areas of Expertise
+    </div>
 
-          <p class="service-description">
-            From early concepts and CAD
-            development to prototypes,
-            refinement and manufacturing
-            handoff.
-          </p>
+
+    <div class="expertise-list">
+
+
+        <div class="expertise-row">
+
+            <div class="expertise-number">
+                01
+            </div>
+
+            <h3 class="expertise-name">
+                Industrial Design
+            </h3>
+
+            <p class="expertise-description">
+
+                From early form exploration
+                to detailed product development,
+                we create products designed
+                around people.
+
+            </p>
 
         </div>
 
 
 
-        <div class="service">
+        <div class="expertise-row">
 
-          <div class="service-number">
-            03
-          </div>
+            <div class="expertise-number">
+                02
+            </div>
 
-          <h3 class="service-title">
-            3D & Visualization
-          </h3>
+            <h3 class="expertise-name">
+                Product Development
+            </h3>
 
-          <p class="service-description">
-            Photorealistic CGI, product
-            animation and digital visualization
-            that communicate ideas before
-            they exist.
-          </p>
+            <p class="expertise-description">
+
+                Concept development,
+                CAD, CMF, prototyping,
+                refinement and manufacturing
+                support.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="expertise-row">
+
+            <div class="expertise-number">
+                03
+            </div>
+
+            <h3 class="expertise-name">
+                3D & CGI
+            </h3>
+
+            <p class="expertise-description">
+
+                Photorealistic product
+                visualization, animation,
+                campaigns and digital
+                storytelling.
+
+            </p>
 
         </div>
 
 
 
-        <div class="service">
+        <div class="expertise-row">
 
-          <div class="service-number">
-            04
-          </div>
+            <div class="expertise-number">
+                04
+            </div>
 
-          <h3 class="service-title">
-            Packaging & Brand
-          </h3>
+            <h3 class="expertise-name">
+                Packaging
+            </h3>
 
-          <p class="service-description">
-            Physical and visual systems that
-            connect products with identity,
-            storytelling and experience.
-          </p>
+            <p class="expertise-description">
+
+                Packaging systems that
+                translate product strategy
+                into physical and visual
+                experiences.
+
+            </p>
 
         </div>
 
 
-      </div>
 
-    </section>
+        <div class="expertise-row">
+
+            <div class="expertise-number">
+                05
+            </div>
+
+            <h3 class="expertise-name">
+                Brand Experience
+            </h3>
+
+            <p class="expertise-description">
+
+                Identity, storytelling and
+                visual systems that extend
+                the product into a complete
+                brand world.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
 
 
 
-    <!-- =====================================================
-         TAURI ZODIAC STORY
-    ===================================================== -->
+<!-- ========================================================
+     ZODIAC BRAND STORY
+========================================================= -->
 
-    <section class="zodiac">
+<section class="zodiac">
 
-      <div class="zodiac-symbol">
+    <div class="zodiac-symbol">
         ♉︎ × ♑︎
-      </div>
+    </div>
 
-      <div class="section-label">
-        The TAURI Symbol
-      </div>
 
-      <h2 class="zodiac-title">
+    <div class="section-label">
+        Why TAURI
+    </div>
+
+
+    <h2>
 
         Grounded by Taurus.<br>
+
         Driven by Capricorn.
 
-      </h2>
+    </h2>
 
-      <p class="zodiac-description">
 
-        TAURI combines the strength,
-        craft and material sensitivity
-        of Taurus with the ambition,
-        structure and discipline of
-        Capricorn.
+    <p>
+
+        Taurus represents materiality,
+        craftsmanship and appreciation
+        for things made beautifully.
 
         <br><br>
 
-        Together, they represent our
-        approach to product design —
-        grounded enough to make ideas
-        tangible and ambitious enough
-        to shape what comes next.
+        Capricorn represents ambition,
+        structure and long-term thinking.
 
-      </p>
+        <br><br>
 
-    </section>
+        TAURI brings both together
+        to create products that are
+        considered, useful and built
+        to last.
 
+    </p>
 
-
-    <!-- =====================================================
-         PROCESS
-    ===================================================== -->
-
-    <section
-      class="section"
-      id="process"
-    >
-
-      <div class="section-label">
-        04 — Process
-      </div>
-
-      <h2 class="process-title">
-
-        Discover. Define. Explore.
-
-        <span>
-          Develop. Validate. Launch.
-        </span>
-
-      </h2>
-
-    </section>
+</section>
 
 
 
-    <!-- =====================================================
-         CONTACT
-    ===================================================== -->
+<!-- ========================================================
+     PROCESS
+========================================================= -->
 
-    <section
-      class="cta"
-      id="contact"
-    >
+<section
+    class="section"
+    id="process"
+>
 
-      <div class="section-label">
-        Have a product in mind?
-      </div>
+    <div class="section-label">
+        04 — Our Process
+    </div>
 
-      <h2 class="cta-title">
 
-        LET'S MAKE
+    <div class="process-grid">
+
+
+        <div class="process-item">
+
+            <div class="process-number">
+                01
+            </div>
+
+            <h3 class="process-title">
+                Discover
+            </h3>
+
+            <p class="process-text">
+
+                Understand the problem,
+                users, market and opportunity.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="process-item">
+
+            <div class="process-number">
+                02
+            </div>
+
+            <h3 class="process-title">
+                Design
+            </h3>
+
+            <p class="process-text">
+
+                Explore form, function,
+                materials and experience.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="process-item">
+
+            <div class="process-number">
+                03
+            </div>
+
+            <h3 class="process-title">
+                Develop
+            </h3>
+
+            <p class="process-text">
+
+                Refine concepts through CAD,
+                visualization and prototypes.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="process-item">
+
+            <div class="process-number">
+                04
+            </div>
+
+            <h3 class="process-title">
+                Validate
+            </h3>
+
+            <p class="process-text">
+
+                Test, iterate and make the
+                product ready for reality.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="process-item">
+
+            <div class="process-number">
+                05
+            </div>
+
+            <h3 class="process-title">
+                Deliver
+            </h3>
+
+            <p class="process-text">
+
+                Prepare final assets,
+                specifications and production
+                documentation.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="process-item">
+
+            <div class="process-number">
+                06
+            </div>
+
+            <h3 class="process-title">
+                Launch
+            </h3>
+
+            <p class="process-text">
+
+                Bring the product into the
+                world with a strong visual
+                and brand story.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================
+     CONTACT
+========================================================= -->
+
+<section
+    class="cta"
+    id="contact"
+>
+
+    <div class="section-label">
+        Have an idea?
+    </div>
+
+
+    <h2 class="cta-title">
+
+        LET'S BUILD
 
         <br>
 
         <span>
-          IT REAL.
+            SOMETHING.
         </span>
 
-      </h2>
+    </h2>
 
-      <a
+
+    <a
         href="mailto:hello@tauri.design"
         class="cta-button"
-      >
+    >
+
         Start a conversation →
-      </a>
 
-    </section>
+    </a>
+
+</section>
 
 
 
-    <!-- =====================================================
-         FOOTER
-    ===================================================== -->
+<!-- ========================================================
+     FOOTER
+========================================================= -->
 
-    <footer>
+<footer>
 
-      <span>
-        TAURI — Product Design Studio
-      </span>
+    <div>
+        TAURI — Multidisciplinary Product Design
+    </div>
 
-      <span>
+    <div>
         © 2026 TAURI
-      </span>
+    </div>
 
-    </footer>
-
-
-  </div>
+</footer>
 
 
-
-  <!-- =====================================================
-       JAVASCRIPT
-  ===================================================== -->
-
-  <script>
-
-    /*
-      -------------------------------------------------------
-      OPENING LOGO ANIMATION
-      -------------------------------------------------------
-    */
-
-    const intro =
-      document.getElementById("intro");
-
-    const site =
-      document.getElementById("site");
+</div>
 
 
-    window.addEventListener(
-      "load",
-      () => {
 
-        /*
-          Logo remains on screen
-          for 2.6 seconds.
-        */
+<!-- ========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+
+/* =========================================================
+   INTRO ANIMATION
+========================================================= */
+
+window.addEventListener(
+    "load",
+    function() {
 
         setTimeout(
-          () => {
+            function() {
 
-            intro.classList.add("hide");
+                document
+                    .getElementById("intro")
+                    .classList
+                    .add("hide");
 
-            site.classList.add("show");
 
-          },
-          2600
+                document
+                    .getElementById("site")
+                    .classList
+                    .add("show");
+
+            },
+            2600
         );
 
-      }
-    );
+    }
+);
 
 
-    /*
-      -------------------------------------------------------
-      NAVIGATION BLUR ON SCROLL
-      -------------------------------------------------------
-    */
 
-    const nav =
-      document.getElementById("nav");
+/* =========================================================
+   NAVIGATION ON SCROLL
+========================================================= */
 
+window.addEventListener(
+    "scroll",
+    function() {
 
-    window.addEventListener(
-      "scroll",
-      () => {
+        const header =
+            document.getElementById("header");
+
 
         if (
-          window.scrollY > 40
+            window.scrollY > 50
         ) {
 
-          nav.classList.add(
-            "scrolled"
-          );
+            header.classList.add(
+                "scrolled"
+            );
 
         } else {
 
-          nav.classList.remove(
-            "scrolled"
-          );
+            header.classList.remove(
+                "scrolled"
+            );
 
         }
 
-      }
-    );
+    }
+);
 
-  </script>
+
+
+/* =========================================================
+   IMAGE PARALLAX
+========================================================= */
+
+window.addEventListener(
+    "scroll",
+    function() {
+
+        const hero =
+            document.querySelector(
+                ".hero-right img"
+            );
+
+
+        if (!hero) return;
+
+
+        const scroll =
+            window.scrollY;
+
+
+        if (scroll < window.innerHeight) {
+
+            hero.style.transform =
+                `translateY(${scroll * .08}px) scale(1.02)`;
+
+        }
+
+    }
+);
+
+
+</script>
 
 
 </body>
+
 </html>
