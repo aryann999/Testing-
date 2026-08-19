@@ -1,1730 +1,1565 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>LUXEVA — Beyond Luxury</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-    <style>
-
-        :root {
-            --black: #050504;
-            --dark: #0b0a08;
-            --gold: #c9a45c;
-            --gold-light: #f0d18a;
-            --cream: #f5efe4;
-            --muted: #9b9488;
-            --border: rgba(201,164,92,.25);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: var(--black);
-            color: var(--cream);
-            font-family: Inter, sans-serif;
-            font-weight: 300;
-            overflow-x: hidden;
-        }
-
-        /* =========================
-           CURSOR GLOW
-        ========================= */
-
-        .cursor-glow {
-            position: fixed;
-            width: 350px;
-            height: 350px;
-            border-radius: 50%;
-            pointer-events: none;
-            background: radial-gradient(
-                circle,
-                rgba(201,164,92,.09),
-                transparent 65%
-            );
-            transform: translate(-50%, -50%);
-            z-index: 9999;
-            mix-blend-mode: screen;
-        }
-
-        /* =========================
-           GOLD PARTICLES
-        ========================= */
-
-        .particles {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--gold);
-            border-radius: 50%;
-            opacity: .35;
-            animation: floatParticle linear infinite;
-        }
-
-        @keyframes floatParticle {
-            from {
-                transform: translateY(100vh);
-            }
-
-            to {
-                transform: translateY(-100px);
-            }
-        }
-
-        /* =========================
-           NAVBAR
-        ========================= */
-
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 22px 5%;
-            transition: .5s;
-        }
-
-        header.scrolled {
-            background: rgba(5,5,4,.82);
-            backdrop-filter: blur(25px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        nav {
-            max-width: 1500px;
-            margin: auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-family: "Cormorant Garamond", serif;
-            font-size: 38px;
-            letter-spacing: 8px;
-            color: var(--gold-light);
-        }
-
-        .logo small {
-            display: block;
-            font-family: Inter, sans-serif;
-            font-size: 8px;
-            letter-spacing: 6px;
-            text-align: center;
-            margin-top: -5px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 38px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #ddd4c5;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: .3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--gold-light);
-        }
-
-        .nav-actions {
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-actions button {
-            background: none;
-            border: 0;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            transition: .3s;
-        }
-
-        .nav-actions button:hover {
-            color: var(--gold-light);
-            transform: translateY(-2px);
-        }
-
-        /* =========================
-           HERO
-        ========================= */
-
-        .hero {
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    rgba(3,3,2,.95) 0%,
-                    rgba(3,3,2,.75) 40%,
-                    rgba(3,3,2,.15) 100%
-                ),
-                url("luxury-hero.png") center/cover no-repeat;
-        }
-
-        .hero::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(
-                    transparent 70%,
-                    #050504
-                );
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 1450px;
-            width: 90%;
-            margin: auto;
-            padding-top: 80px;
-        }
-
-        .eyebrow {
-            color: var(--gold-light);
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            font-size: 11px;
-            margin-bottom: 25px;
-        }
-
-        .hero h1 {
-            font-family: "Cormorant Garamond", serif;
-            font-weight: 300;
-            font-size: clamp(65px, 8vw, 125px);
-            line-height: .85;
-            max-width: 800px;
-        }
-
-        .hero h1 span {
-            color: var(--gold-light);
-            font-style: italic;
-        }
-
-        .hero-description {
-            max-width: 440px;
-            margin-top: 35px;
-            line-height: 1.8;
-            color: #c1b9aa;
-            font-size: 14px;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 40px;
-        }
-
-        .btn {
-            padding: 17px 30px;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 10px;
-            transition: .4s;
-        }
-
-        .btn-gold {
-            color: #050504;
-            background: var(--gold-light);
-        }
-
-        .btn-gold:hover {
-            box-shadow: 0 10px 40px rgba(201,164,92,.25);
-            transform: translateY(-4px);
-        }
-
-        .btn-outline {
-            color: white;
-            border: 1px solid var(--border);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--gold-light);
-            color: var(--gold-light);
-        }
-
-        /* =========================
-           TECHNOLOGY BAR
-        ========================= */
-
-        .technology {
-            position: relative;
-            z-index: 5;
-            background: rgba(12,11,9,.92);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(20px);
-        }
-
-        .tech-grid {
-            max-width: 1400px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(4,1fr);
-        }
-
-        .tech-item {
-            padding: 35px;
-            border-right: 1px solid rgba(201,164,92,.12);
-        }
-
-        .tech-item:last-child {
-            border: 0;
-        }
-
-        .tech-icon {
-            font-size: 30px;
-            color: var(--gold-light);
-            margin-bottom: 15px;
-        }
-
-        .tech-item h3 {
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .tech-item p {
-            font-size: 11px;
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        /* =========================
-           SECTIONS
-        ========================= */
-
-        section {
-            position: relative;
-            z-index: 2;
-            padding: 130px 6%;
-        }
-
-        .section-title {
-            max-width: 1400px;
-            margin: auto auto 60px;
-        }
-
-        .section-title span {
-            color: var(--gold-light);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            font-size: 10px;
-        }
-
-        .section-title h2 {
-            font-family: "Cormorant Garamond", serif;
-            font-size: clamp(45px, 5vw, 70px);
-            font-weight: 300;
-            margin-top: 15px;
-        }
-
-        /* =========================
-           PRODUCTS
-        ========================= */
-
-        .products {
-            max-width: 1400px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(4,1fr);
-            gap: 18px;
-        }
-
-        .product {
-            position: relative;
-            height: 560px;
-            overflow: hidden;
-            cursor: pointer;
-            background: #11100d;
-            transform-style: preserve-3d;
-            transition: transform .2s;
-        }
-
-        .product img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: .8s;
-        }
-
-        .product:hover img {
-            transform: scale(1.08);
-        }
-
-        .product::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                transparent 45%,
-                rgba(0,0,0,.9)
-            );
-        }
-
-        .product-info {
-            position: absolute;
-            bottom: 25px;
-            left: 25px;
-            right: 25px;
-            z-index: 2;
-        }
-
-        .product-info span {
-            color: var(--gold-light);
-            font-size: 9px;
-            letter-spacing: 3px;
-        }
-
-        .product-info h3 {
-            font-family: "Cormorant Garamond", serif;
-            font-size: 32px;
-            font-weight: 400;
-            margin: 7px 0;
-        }
-
-        .product-info p {
-            color: #bcb4a6;
-            font-size: 12px;
-        }
-
-        .product-price {
-            color: var(--gold-light) !important;
-            margin-top: 10px;
-        }
-
-        /* =========================
-           AI EXPERIENCE
-        ========================= */
-
-        .future {
-            background:
-                radial-gradient(
-                    circle at 80% 50%,
-                    rgba(201,164,92,.08),
-                    transparent 35%
-                ),
-                #090806;
-        }
-
-        .future-container {
-            max-width: 1400px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 70px;
-            align-items: center;
-        }
-
-        .future-text span {
-            color: var(--gold-light);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            font-size: 10px;
-        }
-
-        .future-text h2 {
-            font-family: "Cormorant Garamond", serif;
-            font-size: 70px;
-            font-weight: 300;
-            line-height: .95;
-            margin: 20px 0;
-        }
-
-        .future-text p {
-            color: var(--muted);
-            max-width: 500px;
-            line-height: 1.9;
-        }
-
-        .features {
-            display: flex;
-            gap: 25px;
-            margin-top: 35px;
-        }
-
-        .feature {
-            border: 1px solid var(--border);
-            padding: 18px;
-            width: 150px;
-        }
-
-        .feature strong {
-            display: block;
-            color: var(--gold-light);
-            font-size: 22px;
-            margin-bottom: 8px;
-        }
-
-        .feature span {
-            font-size: 9px;
-            letter-spacing: 1px;
-            color: #aaa;
-        }
-
-        /* =========================
-           3D DISPLAY
-        ========================= */
-
-        .product-stage {
-            perspective: 1200px;
-            min-height: 550px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .stage-card {
-            width: 470px;
-            height: 470px;
-            position: relative;
-            border: 1px solid var(--border);
-            background:
-                radial-gradient(
-                    circle at center,
-                    rgba(201,164,92,.12),
-                    transparent 55%
-                ),
-                #0b0a08;
-            transform-style: preserve-3d;
-            transition: transform .5s;
-            box-shadow:
-                0 40px 100px rgba(0,0,0,.7),
-                inset 0 0 80px rgba(201,164,92,.04);
-        }
-
-        .stage-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            mix-blend-mode: screen;
-            opacity: .9;
-        }
-
-        .scan-ring {
-            position: absolute;
-            width: 320px;
-            height: 320px;
-            border: 1px solid rgba(201,164,92,.4);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-            animation: rotateRing 8s linear infinite;
-        }
-
-        .scan-ring::before {
-            content: "";
-            position: absolute;
-            inset: 25px;
-            border: 1px dashed rgba(201,164,92,.3);
-            border-radius: 50%;
-        }
-
-        @keyframes rotateRing {
-            to {
-                transform: translate(-50%,-50%) rotate(360deg);
-            }
-        }
-
-        .scan-text {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: var(--gold-light);
-            font-size: 9px;
-            letter-spacing: 3px;
-        }
-
-        /* =========================
-           STORY
-        ========================= */
-
-        .story {
-            max-width: 1400px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .story-image {
-            min-height: 650px;
-            background:
-                linear-gradient(
-                    rgba(0,0,0,.15),
-                    rgba(0,0,0,.4)
-                ),
-                url("luxury-hero.png") center/cover;
-        }
-
-        .story-content {
-            background: #11100d;
-            padding: 80px;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-        }
-
-        .story-content span {
-            color: var(--gold-light);
-            letter-spacing: 4px;
-            font-size: 10px;
-        }
-
-        .story-content h2 {
-            font-family: "Cormorant Garamond", serif;
-            font-size: 70px;
-            font-weight: 300;
-            line-height: .9;
-            margin: 20px 0 30px;
-        }
-
-        .story-content p {
-            color: var(--muted);
-            line-height: 1.9;
-            font-size: 13px;
-            max-width: 500px;
-        }
-
-        /* =========================
-           DIGITAL PASSPORT
-        ========================= */
-
-        .passport {
-            text-align: center;
-            background:
-                linear-gradient(
-                    rgba(0,0,0,.6),
-                    rgba(0,0,0,.85)
-                ),
-                url("luxury-hero.png") center/cover fixed;
-        }
-
-        .passport-box {
-            max-width: 800px;
-            margin: auto;
-            padding: 70px;
-            border: 1px solid var(--border);
-            background: rgba(10,9,7,.75);
-            backdrop-filter: blur(20px);
-        }
-
-        .passport-box h2 {
-            font-family: "Cormorant Garamond", serif;
-            font-size: 65px;
-            font-weight: 300;
-        }
-
-        .passport-box p {
-            color: var(--muted);
-            line-height: 1.8;
-            margin: 20px auto 35px;
-            max-width: 600px;
-        }
-
-        /* =========================
-           NEWSLETTER
-        ========================= */
-
-        .newsletter {
-            text-align: center;
-        }
-
-        .newsletter h2 {
-            font-family: "Cormorant Garamond", serif;
-            font-size: 65px;
-            font-weight: 300;
-        }
-
-        .newsletter p {
-            color: var(--muted);
-            max-width: 500px;
-            margin: 15px auto 35px;
-            line-height: 1.8;
-        }
-
-        .newsletter-form {
-            max-width: 500px;
-            margin: auto;
-            display: flex;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            padding: 17px 5px;
-            background: none;
-            border: 0;
-            outline: none;
-            color: white;
-        }
-
-        .newsletter-form button {
-            border: 0;
-            background: none;
-            color: var(--gold-light);
-            letter-spacing: 2px;
-            font-size: 10px;
-            cursor: pointer;
-        }
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            padding: 70px 6% 25px;
-            background: #030302;
-            border-top: 1px solid rgba(201,164,92,.15);
-        }
-
-        .footer-grid {
-            max-width: 1400px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 50px;
-        }
-
-        footer h4 {
-            color: var(--gold-light);
-            font-size: 10px;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-        }
-
-        footer ul {
-            list-style: none;
-        }
-
-        footer li {
-            margin-bottom: 12px;
-        }
-
-        footer a {
-            color: #777168;
-            text-decoration: none;
-            font-size: 12px;
-            transition: .3s;
-        }
-
-        footer a:hover {
-            color: var(--gold-light);
-        }
-
-        .footer-description {
-            color: #777168;
-            max-width: 330px;
-            font-size: 12px;
-            line-height: 1.8;
-            margin-top: 20px;
-        }
-
-        .copyright {
-            max-width: 1400px;
-            margin: 60px auto 0;
-            padding-top: 25px;
-            border-top: 1px solid #171512;
-            text-align: center;
-            color: #45413b;
-            font-size: 9px;
-            letter-spacing: 2px;
-        }
-
-        /* =========================
-           SCROLL ANIMATION
-        ========================= */
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: 1s ease;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
-        @media(max-width:1000px) {
-
-            .nav-links {
-                display: none;
-            }
-
-            .tech-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .products {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .future-container,
-            .story {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media(max-width:600px) {
-
-            header {
-                padding: 15px 5%;
-            }
-
-            .logo {
-                font-size: 28px;
-            }
-
-            .hero {
-                background-position: 65% center;
-            }
-
-            .hero h1 {
-                font-size: 65px;
-            }
-
-            .buttons {
-                flex-direction: column;
-                width: fit-content;
-            }
-
-            section {
-                padding: 80px 5%;
-            }
-
-            .tech-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .tech-item {
-                border-right: 0;
-                border-bottom: 1px solid var(--border);
-            }
-
-            .products {
-                grid-template-columns: 1fr;
-            }
-
-            .product {
-                height: 500px;
-            }
-
-            .future-text h2,
-            .story-content h2,
-            .passport-box h2,
-            .newsletter h2 {
-                font-size: 48px;
-            }
-
-            .features {
-                flex-wrap: wrap;
-            }
-
-            .stage-card {
-                width: 330px;
-                height: 330px;
-            }
-
-            .story-content {
-                padding: 50px 30px;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-        }
-
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TAURI — Multidisciplinary Product Design Studio</title>
+
+  <meta
+    name="description"
+    content="TAURI is a multidisciplinary product design studio creating meaningful products across mobility, consumer technology, furniture, lifestyle and emerging industries."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+
+    /* =====================================================
+       ROOT
+    ===================================================== */
+
+    :root {
+      --bg: #0b0b0b;
+      --surface: #121212;
+      --surface-2: #181818;
+      --text: #f2f0eb;
+      --muted: #9b9b96;
+      --line: rgba(255,255,255,0.12);
+      --accent: #d9ff52;
+      --max: 1400px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+
+    /* =====================================================
+       CUSTOM CURSOR
+    ===================================================== */
+
+    .cursor {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition:
+        width .25s ease,
+        height .25s ease,
+        background .25s ease;
+    }
+
+    .cursor.large {
+      width: 70px;
+      height: 70px;
+      background: rgba(217,255,82,.12);
+      border: 1px solid rgba(217,255,82,.5);
+      backdrop-filter: blur(5px);
+    }
+
+    /* =====================================================
+       GLOBAL
+    ===================================================== */
+
+    .container {
+      width: min(100% - 80px, var(--max));
+      margin: auto;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--muted);
+    }
+
+    .section {
+      padding: 150px 0;
+    }
+
+    .line {
+      width: 100%;
+      height: 1px;
+      background: var(--line);
+    }
+
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 28px 0;
+      mix-blend-mode: difference;
+    }
+
+    .nav-inner {
+      width: min(100% - 80px, var(--max));
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: "Manrope", sans-serif;
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -.06em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 38px;
+      font-size: 13px;
+    }
+
+    .nav-links a {
+      opacity: .8;
+      transition: opacity .3s;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+    }
+
+    .nav-contact {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .nav-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+      padding-bottom: 70px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+
+      background:
+        radial-gradient(
+          circle at 70% 40%,
+          rgba(255,255,255,.09),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 30% 70%,
+          rgba(217,255,82,.045),
+          transparent 25%
+        );
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      opacity: .05;
+
+      background-image:
+        linear-gradient(var(--text) 1px, transparent 1px),
+        linear-gradient(90deg, var(--text) 1px, transparent 1px);
+
+      background-size: 80px 80px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          transparent,
+          black 30%,
+          black 70%,
+          transparent
+        );
+    }
+
+    .hero-content {
+      width: 100%;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 70px;
+    }
+
+    .hero-title {
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(70px, 11vw, 170px);
+      line-height: .84;
+      letter-spacing: -.085em;
+      font-weight: 600;
+      max-width: 1250px;
+    }
+
+    .hero-title span {
+      display: block;
+    }
+
+    .hero-title .outline {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,.45);
+    }
+
+    .hero-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 80px;
+    }
+
+    .hero-description {
+      max-width: 450px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .scroll-indicator {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 15px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      color: var(--muted);
+    }
+
+    .scroll-line {
+      width: 100px;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    /* =====================================================
+       INTRO
+    ===================================================== */
+
+    .intro {
+      padding: 160px 0;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 100px;
+    }
+
+    .intro-title {
+      font-family: "Manrope";
+      font-size: clamp(38px, 5vw, 72px);
+      line-height: 1;
+      letter-spacing: -.06em;
+      max-width: 900px;
+    }
+
+    .intro-title span {
+      color: var(--muted);
+    }
+
+    /* =====================================================
+       WORK
+    ===================================================== */
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 70px;
+    }
+
+    .section-title {
+      font-family: "Manrope";
+      font-size: clamp(45px, 7vw, 90px);
+      letter-spacing: -.07em;
+      line-height: .9;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 80px 30px;
+    }
+
+    .project {
+      position: relative;
+    }
+
+    .project-image {
+      height: 620px;
+      overflow: hidden;
+      background: var(--surface);
+      position: relative;
+    }
+
+    .project-image img {
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .project:hover img {
+      transform: scale(1.05);
+    }
+
+    .project:nth-child(2) {
+      margin-top: 160px;
+    }
+
+    .project:nth-child(3) {
+      margin-top: -40px;
+    }
+
+    .project-info {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      margin-top: 18px;
+    }
+
+    .project-name {
+      font-size: 21px;
+      font-weight: 500;
+    }
+
+    .project-type {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    /* =====================================================
+       SERVICES
+    ===================================================== */
+
+    .services {
+      background: #111;
+    }
+
+    .services-grid {
+      margin-top: 80px;
+    }
+
+    .service {
+      display: grid;
+      grid-template-columns: 100px 1fr 1fr;
+      gap: 40px;
+      padding: 30px 0;
+      border-top: 1px solid var(--line);
+      transition: padding .4s ease;
+    }
+
+    .service:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .service:hover {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .service-number {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .service-name {
+      font-family: "Manrope";
+      font-size: clamp(25px, 3vw, 40px);
+      letter-spacing: -.04em;
+    }
+
+    .service-description {
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 430px;
+    }
+
+    /* =====================================================
+       DISCIPLINES
+    ===================================================== */
+
+    .discipline-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 70px;
+    }
+
+    .discipline {
+      border: 1px solid var(--line);
+      padding: 16px 22px;
+      border-radius: 100px;
+      color: var(--muted);
+      transition: all .3s;
+    }
+
+    .discipline:hover {
+      color: var(--bg);
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* =====================================================
+       PROCESS
+    ===================================================== */
+
+    .process {
+      background: var(--accent);
+      color: #0b0b0b;
+    }
+
+    .process .eyebrow {
+      color: rgba(0,0,0,.6);
+    }
+
+    .process .line {
+      background: rgba(0,0,0,.2);
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 80px;
+      border-top: 1px solid rgba(0,0,0,.2);
+    }
+
+    .process-item {
+      padding: 35px 25px;
+      border-right: 1px solid rgba(0,0,0,.2);
+    }
+
+    .process-item:nth-child(3n) {
+      border-right: none;
+    }
+
+    .process-number {
+      font-size: 12px;
+      opacity: .6;
+    }
+
+    .process-name {
+      font-family: "Manrope";
+      font-size: 30px;
+      letter-spacing: -.05em;
+      margin: 80px 0 20px;
+    }
+
+    .process-description {
+      line-height: 1.6;
+      max-width: 300px;
+    }
+
+    /* =====================================================
+       ABOUT
+    ===================================================== */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 100px;
+    }
+
+    .about-title {
+      font-family: "Manrope";
+      font-size: clamp(40px, 5vw, 70px);
+      letter-spacing: -.06em;
+      line-height: 1;
+    }
+
+    .about-copy {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.7;
+      max-width: 650px;
+    }
+
+    .about-copy p + p {
+      margin-top: 25px;
+    }
+
+    /* =====================================================
+       CTA
+    ===================================================== */
+
+    .cta {
+      padding: 180px 0;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-family: "Manrope";
+      font-size: clamp(60px, 11vw, 150px);
+      letter-spacing: -.09em;
+      line-height: .85;
+    }
+
+    .cta-title span {
+      color: var(--muted);
+    }
+
+    .cta-button {
+      display: inline-flex;
+      margin-top: 70px;
+      padding: 18px 30px;
+      background: var(--text);
+      color: var(--bg);
+      border-radius: 100px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      transition: transform .3s, background .3s;
+    }
+
+    .cta-button:hover {
+      transform: scale(1.05);
+      background: var(--accent);
+    }
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    footer {
+      padding: 35px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: "Manrope";
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -.06em;
+    }
+
+    .footer-center {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-right {
+      text-align: right;
+      font-size: 12px;
+    }
+
+    /* =====================================================
+       REVEAL ANIMATION
+    ===================================================== */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition:
+        opacity 1s ease,
+        transform 1s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    @media(max-width: 800px) {
+
+      body {
+        cursor: auto;
+      }
+
+      .cursor {
+        display: none;
+      }
+
+      .container,
+      .nav-inner {
+        width: min(100% - 35px, var(--max));
+      }
+
+      nav {
+        padding: 20px 0;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-contact {
+        font-size: 10px;
+      }
+
+      .hero {
+        min-height: 90vh;
+        padding-bottom: 40px;
+      }
+
+      .hero-title {
+        font-size: 20vw;
+      }
+
+      .hero-top {
+        margin-bottom: 40px;
+      }
+
+      .hero-bottom {
+        grid-template-columns: 1fr;
+        margin-top: 60px;
+      }
+
+      .scroll-indicator {
+        justify-content: flex-start;
+      }
+
+      .section {
+        padding: 100px 0;
+      }
+
+      .intro {
+        padding: 100px 0;
+      }
+
+      .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-heading .eyebrow {
+        margin-bottom: 30px;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+      }
+
+      .project:nth-child(2),
+      .project:nth-child(3) {
+        margin-top: 0;
+      }
+
+      .project-image {
+        height: 450px;
+      }
+
+      .service {
+        grid-template-columns: 40px 1fr;
+        gap: 20px;
+      }
+
+      .service-description {
+        grid-column: 2;
+      }
+
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(0,0,0,.2);
+      }
+
+      .process-item:last-child {
+        border-bottom: none;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .cta {
+        padding: 120px 0;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .footer-center,
+      .footer-right {
+        text-align: left;
+      }
+
+    }
+
+  </style>
 </head>
-
 
 <body>
 
-    <!-- CURSOR -->
-    <div class="cursor-glow"></div>
+  <!-- =====================================================
+       CURSOR
+  ====================================================== -->
+
+  <div class="cursor"></div>
 
 
-    <!-- PARTICLES -->
+  <!-- =====================================================
+       NAVIGATION
+  ====================================================== -->
 
-    <div class="particles">
+  <nav>
+    <div class="nav-inner">
 
-        <span class="particle" style="left:5%;animation-duration:12s;"></span>
-        <span class="particle" style="left:15%;animation-duration:18s;"></span>
-        <span class="particle" style="left:28%;animation-duration:15s;"></span>
-        <span class="particle" style="left:42%;animation-duration:20s;"></span>
-        <span class="particle" style="left:55%;animation-duration:14s;"></span>
-        <span class="particle" style="left:67%;animation-duration:19s;"></span>
-        <span class="particle" style="left:78%;animation-duration:13s;"></span>
-        <span class="particle" style="left:90%;animation-duration:17s;"></span>
+      <a href="#" class="logo">TAURI</a>
+
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#services">Capabilities</a>
+        <a href="#process">Process</a>
+        <a href="#studio">Studio</a>
+      </div>
+
+      <a href="#contact" class="nav-contact">
+        <span class="nav-dot"></span>
+        Start a project
+      </a>
 
     </div>
+  </nav>
 
 
-    <!-- NAVIGATION -->
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
 
-    <header id="header">
-
-        <nav>
-
-            <div class="logo">
-
-                LUXEVA
-
-                <small>PARIS</small>
-
-            </div>
-
-
-            <ul class="nav-links">
-
-                <li><a href="#collection">New In</a></li>
-
-                <li><a href="#collection">Handbags</a></li>
-
-                <li><a href="#collection">Collections</a></li>
-
-                <li><a href="data:image/jpeg;base64,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">Technology</a></li>
-
-                <li><a href="#story">Maison</a></li>
-
-                <li><a href="#contact">Journal</a></li>
-
-            </ul>
-
-
-            <div class="nav-actions">
-
-                <button>⌕</button>
-
-                <button>♡</button>
-
-                <button>♙</button>
-
-                <button>🛍</button>
-
-            </div>
-
-        </nav>
-
-    </header>
-
-
-    <!-- HERO -->
+  <main>
 
     <section class="hero">
 
-        <div class="hero-content reveal">
+      <div class="hero-bg"></div>
+      <div class="hero-grid"></div>
 
-            <div class="eyebrow">
-                Timeless Elegance · Future Technology
-            </div>
+      <div class="container hero-content">
 
-            <h1>
-                Crafted for<br>
-                the <span>Exceptional.</span>
-            </h1>
+        <div class="hero-top">
+          <div class="eyebrow">
+            Multidisciplinary Product Design Studio
+          </div>
 
-            <p class="hero-description">
+          <div class="eyebrow">
+            India / Worldwide
+          </div>
+        </div>
 
-                Where heritage craftsmanship meets cutting-edge
-                innovation to create a new definition of luxury.
 
-            </p>
+        <h1 class="hero-title">
 
-            <div class="buttons">
+          <span>WE SHAPE</span>
 
-                <a href="#collection" class="btn btn-gold">
-                    Discover Collection →
-                </a>
+          <span class="outline">
+            IDEAS
+          </span>
 
-                <a href="https://github.com/aryann999/Testing-/blob/main/download.jpg" class="btn btn-outline">
-                    Explore Technology
-                </a>
+          <span>
+            INTO OBJECTS.
+          </span>
 
-            </div>
+        </h1>
+
+
+        <div class="hero-bottom">
+
+          <p class="hero-description">
+            TAURI is a multidisciplinary product design studio
+            creating purposeful products where strategy,
+            technology, material and form come together.
+          </p>
+
+          <div class="scroll-indicator">
+            Scroll to explore
+            <span class="scroll-line"></span>
+          </div>
 
         </div>
+
+      </div>
 
     </section>
 
 
-    <!-- TECHNOLOGY -->
+    <!-- =====================================================
+         INTRO
+    ====================================================== -->
 
-    <div class="technology">
+    <section class="intro">
 
-        <div class="tech-grid">
+      <div class="container">
 
-            <div class="tech-item">
+        <div class="intro-grid">
 
-                <div class="tech-icon">◈</div>
+          <div class="eyebrow">
+            01 — The Studio
+          </div>
 
-                <h3>3D Visualization</h3>
+          <h2 class="intro-title reveal">
 
-                <p>
-                    Explore every detail with immersive
-                    360° product experiences.
-                </p>
+            We design across
+            <span>disciplines, industries</span>
+            and possibilities.
 
-            </div>
-
-
-            <div class="tech-item">
-
-                <div class="tech-icon">⌗</div>
-
-                <h3>Augmented Reality</h3>
-
-                <p>
-                    Visualize your perfect bag in your
-                    environment before purchasing.
-                </p>
-
-            </div>
-
-
-            <div class="tech-item">
-
-                <div class="tech-icon">⬡</div>
-
-                <h3>Smart Materials</h3>
-
-                <p>
-                    Advanced materials engineered for
-                    exceptional durability.
-                </p>
-
-            </div>
-
-
-            <div class="tech-item">
-
-                <div class="tech-icon">♢</div>
-
-                <h3>Digital Authenticity</h3>
-
-                <p>
-                    Every piece receives a unique
-                    digital identity.
-                </p>
-
-            </div>
+          </h2>
 
         </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         WORK
+    ====================================================== -->
+
+    <section class="section" id="work">
+
+      <div class="container">
+
+        <div class="section-heading reveal">
+
+          <div>
+            <div class="eyebrow">
+              02 — Selected Work
+            </div>
+          </div>
+
+          <h2 class="section-title">
+            WORK
+          </h2>
+
+        </div>
+
+
+        <div class="project-grid">
+
+
+          <!-- PROJECT 01 -->
+
+          <article class="project reveal">
+
+            <div class="project-image">
+
+              <img
+                src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1600&q=90"
+                alt="Consumer product design"
+              >
+
+            </div>
+
+            <div class="project-info">
+
+              <div class="project-name">
+                Forma One
+              </div>
+
+              <div class="project-type">
+                Consumer Electronics
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- PROJECT 02 -->
+
+          <article class="project reveal">
+
+            <div class="project-image">
+
+              <img
+                src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1600&q=90"
+                alt="Furniture product design"
+              >
+
+            </div>
+
+            <div class="project-info">
+
+              <div class="project-name">
+                Arc Chair
+              </div>
+
+              <div class="project-type">
+                Furniture
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- PROJECT 03 -->
+
+          <article class="project reveal">
+
+            <div class="project-image">
+
+              <img
+                src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1600&q=90"
+                alt="Lighting product design"
+              >
+
+            </div>
+
+            <div class="project-info">
+
+              <div class="project-name">
+                Halo
+              </div>
+
+              <div class="project-type">
+                Lighting
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- PROJECT 04 -->
+
+          <article class="project reveal">
+
+            <div class="project-image">
+
+              <img
+                src="https://images.unsplash.com/photo-1600267165477-6d4cc741b379?auto=format&fit=crop&w=1600&q=90"
+                alt="Technology product design"
+              >
+
+            </div>
+
+            <div class="project-info">
+
+              <div class="project-name">
+                NEO
+              </div>
+
+              <div class="project-type">
+                Smart Technology
+              </div>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SERVICES
+    ====================================================== -->
+
+    <section class="section services" id="services">
+
+      <div class="container">
+
+        <div class="section-heading reveal">
+
+          <div class="eyebrow">
+            03 — Capabilities
+          </div>
+
+          <h2 class="section-title">
+            WHAT WE DO
+          </h2>
+
+        </div>
+
+
+        <div class="services-grid">
+
+
+          <div class="service reveal">
+
+            <div class="service-number">
+              01
+            </div>
+
+            <h3 class="service-name">
+              Industrial Design
+            </h3>
+
+            <p class="service-description">
+              Product form, ergonomics, aesthetics and
+              user experience translated into distinctive
+              physical products.
+            </p>
+
+          </div>
+
+
+          <div class="service reveal">
+
+            <div class="service-number">
+              02
+            </div>
+
+            <h3 class="service-name">
+              Product Development
+            </h3>
+
+            <p class="service-description">
+              From early concepts and CAD development
+              to prototypes, refinement and manufacturing
+              handoff.
+            </p>
+
+          </div>
+
+
+          <div class="service reveal">
+
+            <div class="service-number">
+              03
+            </div>
+
+            <h3 class="service-name">
+              3D & Visualization
+            </h3>
+
+            <p class="service-description">
+              Photorealistic CGI, product animation,
+              design visualization and digital experiences
+              that communicate ideas before they exist.
+            </p>
+
+          </div>
+
+
+          <div class="service reveal">
+
+            <div class="service-number">
+              04
+            </div>
+
+            <h3 class="service-name">
+              Packaging
+            </h3>
+
+            <p class="service-description">
+              Packaging systems that connect physical
+              products with identity, interaction and
+              shelf presence.
+            </p>
+
+          </div>
+
+
+          <div class="service reveal">
+
+            <div class="service-number">
+              05
+            </div>
+
+            <h3 class="service-name">
+              Brand & Experience
+            </h3>
+
+            <p class="service-description">
+              Visual identities and experiences that
+              extend beyond the product into a complete
+              brand ecosystem.
+            </p>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         DISCIPLINES
+    ====================================================== -->
+
+    <section class="section">
+
+      <div class="container">
+
+        <div class="eyebrow">
+          Industries & Disciplines
+        </div>
+
+        <div class="discipline-list reveal">
+
+          <span class="discipline">Consumer Electronics</span>
+
+          <span class="discipline">Mobility</span>
+
+          <span class="discipline">Furniture</span>
+
+          <span class="discipline">Home Appliances</span>
+
+          <span class="discipline">Lifestyle</span>
+
+          <span class="discipline">Wearables</span>
+
+          <span class="discipline">Packaging</span>
+
+          <span class="discipline">Technology</span>
+
+          <span class="discipline">Lighting</span>
+
+          <span class="discipline">Healthcare</span>
+
+          <span class="discipline">Emerging Products</span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PROCESS
+    ====================================================== -->
+
+    <section class="section process" id="process">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div class="eyebrow">
+            04 — Process
+          </div>
+
+          <h2 class="section-title">
+            FROM IDEA<br>
+            TO REALITY.
+          </h2>
+
+        </div>
+
+
+        <div class="process-grid">
+
+
+          <div class="process-item reveal">
+
+            <div class="process-number">
+              01
+            </div>
+
+            <h3 class="process-name">
+              Discover
+            </h3>
+
+            <p class="process-description">
+              Understand the opportunity, user,
+              market and problem before designing
+              the solution.
+            </p>
+
+          </div>
+
+
+          <div class="process-item reveal">
+
+            <div class="process-number">
+              02
+            </div>
+
+            <h3 class="process-name">
+              Define
+            </h3>
+
+            <p class="process-description">
+              Turn research into a focused product
+              strategy and clear design direction.
+            </p>
+
+          </div>
+
+
+          <div class="process-item reveal">
+
+            <div class="process-number">
+              03
+            </div>
+
+            <h3 class="process-name">
+              Explore
+            </h3>
+
+            <p class="process-description">
+              Generate multiple possibilities through
+              sketching, form exploration and concept
+              development.
+            </p>
+
+          </div>
+
+
+          <div class="process-item reveal">
+
+            <div class="process-number">
+              04
+            </div>
+
+            <h3 class="process-name">
+              Develop
+            </h3>
+
+            <p class="process-description">
+              Refine the chosen direction through
+              CAD, CMF, engineering and prototyping.
+            </p>
+
+          </div>
+
+
+          <div class="process-item reveal">
+
+            <div class="process-number">
+              05
+            </div>
+
+            <h3 class="process-name">
+              Validate
+            </h3>
+
+            <p class="process-description">
+              Test, challenge and refine the product
+              against real-world requirements.
+            </p>
+
+          </div>
+
+
+          <div class="process-item reveal">
+
+            <div class="process-number">
+              06
+            </div>
+
+            <h3 class="process-name">
+              Launch
+            </h3>
+
+            <p class="process-description">
+              Prepare the final product for manufacturing,
+              communication and market launch.
+            </p>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         STUDIO
+    ====================================================== -->
+
+    <section class="section" id="studio">
+
+      <div class="container">
+
+        <div class="about-grid">
+
+          <div class="eyebrow">
+            05 — About TAURI
+          </div>
+
+          <div>
+
+            <h2 class="about-title reveal">
+              DESIGNING THE
+              THINGS THAT
+              SHAPE EVERYDAY.
+            </h2>
+
+            <div class="about-copy reveal">
+
+              <p>
+                TAURI is an independent multidisciplinary
+                product design studio built around one belief:
+                great products happen when different
+                disciplines work as one.
+              </p>
+
+              <p>
+                We bring together industrial design,
+                visualization, engineering thinking,
+                materials, branding and storytelling
+                to create products with clarity and character.
+              </p>
+
+              <p>
+                From the first sketch to the final product,
+                we stay curious, challenge assumptions and
+                obsess over the details that make something
+                feel right.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CTA
+    ====================================================== -->
+
+    <section class="cta" id="contact">
+
+      <div class="container">
+
+        <div class="eyebrow">
+          Have a product in mind?
+        </div>
+
+        <h2 class="cta-title reveal">
+
+          LET'S MAKE<br>
+
+          <span>IT REAL.</span>
+
+        </h2>
+
+        <a
+          href="mailto:hello@tauri.design"
+          class="cta-button"
+        >
+          Start a conversation →
+        </a>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div class="footer-logo">
+          TAURI
+        </div>
+
+        <div class="footer-center">
+          Multidisciplinary Product Design Studio
+        </div>
+
+        <div class="footer-right">
+          © 2026 TAURI
+        </div>
+
+      </div>
 
     </div>
 
+  </footer>
 
-    <!-- COLLECTION -->
 
-    <section id="collection">
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
 
-        <div class="section-title reveal">
+  <script>
 
-            <span>Our Iconic Collections</span>
+    /* ---------------------------------------------
+       CUSTOM CURSOR
+    --------------------------------------------- */
 
-            <h2>
-                Modern Design. Eternal Luxury.
-            </h2>
+    const cursor = document.querySelector(".cursor");
 
-        </div>
+    document.addEventListener("mousemove", (e) => {
 
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top = e.clientY + "px";
 
-        <div class="products">
+    });
 
-            <div class="product reveal">
 
-                <img
-                    src="luxury-hero.png"
-                    alt="LUXEVA Iconic Classic"
-                >
+    document.querySelectorAll("a, .project, .discipline")
+      .forEach(element => {
 
-                <div class="product-info">
+        element.addEventListener("mouseenter", () => {
+          cursor.classList.add("large");
+        });
 
-                    <span>ICONIC CLASSICS</span>
+        element.addEventListener("mouseleave", () => {
+          cursor.classList.remove("large");
+        });
 
-                    <h3>Le Parisien</h3>
+      });
 
-                    <p>Signature Crocodile Leather</p>
 
-                    <p class="product-price">
-                        ₹1,85,000
-                    </p>
+    /* ---------------------------------------------
+       SCROLL REVEAL
+    --------------------------------------------- */
 
-                </div>
+    const revealElements =
+      document.querySelectorAll(".reveal");
 
-            </div>
+    const observer =
+      new IntersectionObserver(
 
+        entries => {
 
-            <div class="product reveal">
+          entries.forEach(entry => {
 
-                <img
-                    src="luxury-hero.png"
-                    alt="LUXEVA New Arrival"
-                >
+            if (entry.isIntersecting) {
 
-                <div class="product-info">
+              entry.target.classList.add("visible");
 
-                    <span>NEW ARRIVAL</span>
-
-                    <h3>Étoile</h3>
-
-                    <p>Italian Calfskin</p>
-
-                    <p class="product-price">
-                        ₹1,42,000
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="product reveal">
-
-                <img
-                    src="luxury-hero.png"
-                    alt="LUXEVA Limited Edition"
-                >
-
-                <div class="product-info">
-
-                    <span>LIMITED EDITION</span>
-
-                    <h3>Riviera</h3>
-
-                    <p>Hand Finished Leather</p>
-
-                    <p class="product-price">
-                        ₹2,15,000
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="product reveal">
-
-                <img
-                    src="luxury-hero.png"
-                    alt="LUXEVA Bespoke Collection"
-                >
-
-                <div class="product-info">
-
-                    <span>BESPOKE</span>
-
-                    <h3>Atelier No.01</h3>
-
-                    <p>Made-to-Order Collection</p>
-
-                    <p class="product-price">
-                        ₹3,25,000
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- FUTURE OF LUXURY -->
-
-    <section class="future" id="future">
-
-        <div class="future-container">
-
-            <div class="future-text reveal">
-
-                <span>
-                    The Future of Luxury
-                </span>
-
-                <h2>
-                    Experience Luxury
-                    Like Never Before.
-                </h2>
-
-                <p>
-
-                    LUXEVA combines artificial intelligence,
-                    immersive 3D technology and augmented reality
-                    to create an entirely new shopping experience.
-
-                </p>
-
-
-                <div class="features">
-
-                    <div class="feature">
-
-                        <strong>AI</strong>
-
-                        <span>
-                            PERSONALIZED
-                            RECOMMENDATIONS
-                        </span>
-
-                    </div>
-
-
-                    <div class="feature">
-
-                        <strong>AR</strong>
-
-                        <span>
-                            VIRTUAL
-                            TRY-ON
-                        </span>
-
-                    </div>
-
-
-                    <div class="feature">
-
-                        <strong>3D</strong>
-
-                        <span>
-                            IMMERSIVE
-                            VIEW
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <br>
-
-                <a href="#" class="btn btn-gold">
-                    Explore Experience →
-                </a>
-
-            </div>
-
-
-            <div class="product-stage reveal">
-
-                <div class="stage-card" id="stageCard">
-
-                    <img
-                        src="luxury-hero.png"
-                        alt="LUXEVA 3D Experience"
-                    >
-
-                    <div class="scan-ring"></div>
-
-                    <div class="scan-text">
-                        360° DIGITAL EXPERIENCE
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- STORY -->
-
-    <section id="story">
-
-        <div class="story reveal">
-
-            <div class="story-image"></div>
-
-
-            <div class="story-content">
-
-                <span>
-                    Heritage & Craftsmanship
-                </span>
-
-                <h2>
-                    Handcrafted
-                    by Masters.
-                </h2>
-
-                <p>
-
-                    Every LUXEVA piece is a fusion of traditional
-                    European craftsmanship and modern innovation.
-
-                    From the first cut of leather to the final
-                    hand-polished detail, every stage is carefully
-                    inspected by our master artisans.
-
-                </p>
-
-                <br>
-
-                <p>
-
-                    The result is not simply a handbag.
-
-                    It is a piece of art designed to become part
-                    of your story.
-
-                </p>
-
-                <br>
-
-                <a href="#" class="btn btn-outline">
-                    Discover Our Atelier →
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- DIGITAL AUTHENTICITY -->
-
-    <section class="passport">
-
-        <div class="passport-box reveal">
-
-            <div class="eyebrow">
-                LUXEVA DIGITAL PASSPORT
-            </div>
-
-            <h2>
-                Your Bag.
-                Your Identity.
-            </h2>
-
-            <p>
-
-                Every LUXEVA creation comes with a unique
-                digital certificate that verifies authenticity,
-                ownership and product history.
-
-            </p>
-
-            <a href="#" class="btn btn-gold">
-                Verify Your Bag →
-            </a>
-
-        </div>
-
-    </section>
-
-
-    <!-- NEWSLETTER -->
-
-    <section class="newsletter" id="contact">
-
-        <div class="reveal">
-
-            <div class="eyebrow">
-                Private Access
-            </div>
-
-            <h2>
-                Enter the World of LUXEVA.
-            </h2>
-
-            <p>
-
-                Receive private collection previews,
-                exclusive invitations and stories from
-                the world of LUXEVA.
-
-            </p>
-
-
-            <form
-                class="newsletter-form"
-                onsubmit="subscribe(event)"
-            >
-
-                <input
-                    type="email"
-                    placeholder="Your email address"
-                    required
-                >
-
-                <button>
-                    JOIN →
-                </button>
-
-            </form>
-
-        </div>
-
-    </section>
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-        <div class="footer-grid">
-
-            <div>
-
-                <div class="logo">
-                    LUXEVA
-
-                    <small>PARIS</small>
-                </div>
-
-                <p class="footer-description">
-
-                    A new expression of luxury where
-                    timeless craftsmanship meets
-                    intelligent technology.
-
-                </p>
-
-            </div>
-
-
-            <div>
-
-                <h4>Explore</h4>
-
-                <ul>
-
-                    <li>
-                        <a href="#collection">
-                            Collections
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            New Arrivals
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            Bespoke
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            Gift Cards
-                        </a>
-                    </li>
-
-                </ul>
-
-            </div>
-
-
-            <div>
-
-                <h4>Client Care</h4>
-
-                <ul>
-
-                    <li>
-                        <a href="#">
-                            Contact
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            Shipping
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            Returns
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            Care Guide
-                        </a>
-                    </li>
-
-                </ul>
-
-            </div>
-
-
-            <div>
-
-                <h4>Follow</h4>
-
-                <ul>
-
-                    <li>
-                        <a href="#">
-                            Instagram
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            Pinterest
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            Facebook
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            YouTube
-                        </a>
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-
-        <div class="copyright">
-
-            © 2026 LUXEVA PARIS · ALL RIGHTS RESERVED
-
-        </div>
-
-    </footer>
-
-
-    <script>
-
-        /* =========================
-           NAVBAR
-        ========================= */
-
-        window.addEventListener("scroll", () => {
-
-            const header =
-                document.getElementById("header");
-
-            if (window.scrollY > 60) {
-
-                header.classList.add("scrolled");
-
-            } else {
-
-                header.classList.remove("scrolled");
+              observer.unobserve(entry.target);
 
             }
 
-        });
+          });
 
+        },
 
-        /* =========================
-           CURSOR
-        ========================= */
-
-        const cursor =
-            document.querySelector(".cursor-glow");
-
-        document.addEventListener("mousemove", e => {
-
-            cursor.style.left = e.clientX + "px";
-
-            cursor.style.top = e.clientY + "px";
-
-        });
-
-
-        /* =========================
-           SCROLL REVEAL
-        ========================= */
-
-        const observer =
-            new IntersectionObserver(
-                entries => {
-
-                    entries.forEach(entry => {
-
-                        if (entry.isIntersecting) {
-
-                            entry.target.classList.add("active");
-
-                        }
-
-                    });
-
-                },
-                {
-                    threshold: .15
-                }
-            );
-
-
-        document
-            .querySelectorAll(".reveal")
-            .forEach(el => observer.observe(el));
-
-
-        /* =========================
-           3D PRODUCT EFFECT
-        ========================= */
-
-        const stage =
-            document.getElementById("stageCard");
-
-        stage.addEventListener("mousemove", e => {
-
-            const rect =
-                stage.getBoundingClientRect();
-
-            const x =
-                e.clientX - rect.left;
-
-            const y =
-                e.clientY - rect.top;
-
-            const rotateY =
-                ((x / rect.width) - .5) * 15;
-
-            const rotateX =
-                ((y / rect.height) - .5) * -15;
-
-            stage.style.transform =
-                `rotateX(${rotateX}deg)
-                 rotateY(${rotateY}deg)
-                 scale(1.02)`;
-
-        });
-
-
-        stage.addEventListener("mouseleave", () => {
-
-            stage.style.transform =
-                "rotateX(0) rotateY(0) scale(1)";
-
-        });
-
-
-        /* =========================
-           PRODUCT TILT
-        ========================= */
-
-        document
-            .querySelectorAll(".product")
-            .forEach(card => {
-
-                card.addEventListener("mousemove", e => {
-
-                    const rect =
-                        card.getBoundingClientRect();
-
-                    const x =
-                        e.clientX - rect.left;
-
-                    const y =
-                        e.clientY - rect.top;
-
-                    const rotateY =
-                        ((x / rect.width) - .5) * 5;
-
-                    const rotateX =
-                        ((y / rect.height) - .5) * -5;
-
-                    card.style.transform =
-                        `perspective(900px)
-                         rotateX(${rotateX}deg)
-                         rotateY(${rotateY}deg)`;
-
-                });
-
-
-                card.addEventListener("mouseleave", () => {
-
-                    card.style.transform =
-                        "perspective(900px) rotateX(0) rotateY(0)";
-
-                });
-
-            });
-
-
-        /* =========================
-           NEWSLETTER
-        ========================= */
-
-        function subscribe(event) {
-
-            event.preventDefault();
-
-            const email =
-                event.target.querySelector("input").value;
-
-            alert(
-                "Welcome to LUXEVA.\n\n" +
-                email +
-                " has been added to our private access list."
-            );
-
-            event.target.reset();
-
+        {
+          threshold: .12
         }
 
-    </script>
+      );
+
+
+    revealElements.forEach(element => {
+      observer.observe(element);
+    });
+
+
+    /* ---------------------------------------------
+       NAVIGATION BACKGROUND
+    --------------------------------------------- */
+
+    window.addEventListener("scroll", () => {
+
+      const nav = document.querySelector("nav");
+
+      if (window.scrollY > 80) {
+
+        nav.style.background =
+          "rgba(11,11,11,.72)";
+
+        nav.style.backdropFilter =
+          "blur(20px)";
+
+      } else {
+
+        nav.style.background =
+          "transparent";
+
+        nav.style.backdropFilter =
+          "none";
+
+      }
+
+    });
+
+
+  </script>
 
 </body>
 </html>
