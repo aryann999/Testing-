@@ -8,11 +8,11 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>TAURI — Multidisciplinary Product Design</title>
+<title>TAURI — Design Beyond Products</title>
 
 <meta
 name="description"
-content="TAURI is a multidisciplinary product design studio creating products, experiences and visual systems across industries."
+content="TAURI is an independent multidisciplinary product design studio creating objects, products, identities and experiences."
 >
 
 <link rel="preconnect"
@@ -23,212 +23,402 @@ content="TAURI is a multidisciplinary product design studio creating products, e
       crossorigin>
 
 <link
-href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Manrope:wght@300;400;500;600;700;800&display=swap"
 rel="stylesheet">
 
 
 <style>
 
 /* =========================================================
-   RESET
-========================================================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background: #f4f1ea;
-    color: #111;
-    font-family: "DM Sans", sans-serif;
-    overflow-x: hidden;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-img {
-    width: 100%;
-    display: block;
-}
-
-
-/* =========================================================
-   VARIABLES
+   ROOT
 ========================================================= */
 
 :root {
 
-    --cream: #f4f1ea;
-    --black: #111111;
-    --dark: #171717;
+    --bg: #070707;
+    --surface: #101010;
+    --surface2: #151515;
 
-    --grey: #77736c;
+    --white: #f1eee7;
+    --muted: #85827b;
 
-    --line: rgba(0,0,0,.14);
+    --gold: #c6a66b;
+    --gold2: #e1c78f;
 
-    --gold: #b99a61;
+    --line: rgba(255,255,255,.12);
 
-    --max: 1450px;
+    --ease:
+        cubic-bezier(.16,1,.3,1);
+
 }
 
 
 /* =========================================================
-   LOADING / LOGO INTRO
+   RESET
 ========================================================= */
 
-#intro {
+* {
 
-    position: fixed;
+    margin: 0;
 
-    inset: 0;
+    padding: 0;
 
-    z-index: 99999;
+    box-sizing: border-box;
 
-    background: #050505;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    transition:
-        opacity 1s ease,
-        visibility 1s ease;
-}
-
-#intro.hide {
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
 }
 
 
-.intro-inner {
+html {
 
-    text-align: center;
+    scroll-behavior: smooth;
 
-    animation:
-        introReveal 1.7s
-        cubic-bezier(.16,1,.3,1);
 }
 
 
-.intro-symbol {
+body {
 
-    width: 90px;
-    height: 90px;
+    background:
+        var(--bg);
+
+    color:
+        var(--white);
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    overflow-x:
+        hidden;
+
+    cursor:
+        none;
+
+}
+
+
+a {
+
+    color:
+        inherit;
+
+    text-decoration:
+        none;
+
+}
+
+
+button {
+
+    font-family:
+        inherit;
+
+}
+
+
+img {
+
+    display:
+        block;
+
+    width:
+        100%;
+
+}
+
+
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+
+.cursor {
+
+    position:
+        fixed;
+
+    width:
+        12px;
+
+    height:
+        12px;
+
+    background:
+        var(--gold);
+
+    border-radius:
+        50%;
+
+    pointer-events:
+        none;
+
+    z-index:
+        100000;
+
+    transform:
+        translate(-50%,-50%);
+
+    mix-blend-mode:
+        difference;
+
+}
+
+
+.cursor-ring {
+
+    position:
+        fixed;
+
+    width:
+        42px;
+
+    height:
+        42px;
 
     border:
         1px solid
-        rgba(210,185,130,.55);
+        rgba(198,166,107,.65);
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
-    display: flex;
+    pointer-events:
+        none;
 
-    align-items: center;
+    z-index:
+        99999;
 
-    justify-content: center;
+    transform:
+        translate(-50%,-50%);
 
-    margin: auto;
+    transition:
+        width .35s var(--ease),
+        height .35s var(--ease),
+        background .35s ease;
 
-    color: #d9bd83;
-
-    font-family: Georgia, serif;
-
-    font-size: 32px;
-
-    letter-spacing: -7px;
-
-    padding-right: 7px;
 }
 
 
-.intro-name {
+body.hovering .cursor-ring {
 
-    color: #f4f1ea;
+    width:
+        72px;
 
-    font-family: "Manrope";
+    height:
+        72px;
 
-    font-size:
-        clamp(48px,8vw,90px);
+    background:
+        rgba(198,166,107,.08);
 
-    letter-spacing: .35em;
-
-    padding-left: .35em;
-
-    margin-top: 25px;
-}
-
-
-.intro-sub {
-
-    color: #c9b98f;
-
-    font-size: 9px;
-
-    text-transform: uppercase;
-
-    letter-spacing: .32em;
-
-    margin-top: 15px;
-}
-
-
-@keyframes introReveal {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(35px)
-            scale(.93);
-
-        filter: blur(10px);
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
-        filter: blur(0);
-    }
 }
 
 
 /* =========================================================
-   SITE
+   PRELOADER
 ========================================================= */
 
-#site {
+.loader {
 
-    opacity: 0;
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        99990;
+
+    background:
+        #050505;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
 
     transition:
-        opacity 1.2s ease;
+        opacity 1.2s var(--ease),
+        visibility 1.2s;
 }
 
-#site.show {
 
-    opacity: 1;
+.loader.hide {
+
+    opacity:
+        0;
+
+    visibility:
+        hidden;
+
+}
+
+
+.loader-content {
+
+    text-align:
+        center;
+
+}
+
+
+.loader-symbol {
+
+    width:
+        90px;
+
+    height:
+        90px;
+
+    border:
+        1px solid
+        rgba(198,166,107,.6);
+
+    border-radius:
+        50%;
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    color:
+        var(--gold2);
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size:
+        31px;
+
+    letter-spacing:
+        -7px;
+
+    padding-right:
+        7px;
+
+    animation:
+        symbolPulse 2s infinite;
+
+}
+
+
+.loader-name {
+
+    margin-top:
+        28px;
+
+    font-size:
+        clamp(48px,8vw,95px);
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        .34em;
+
+    padding-left:
+        .34em;
+
+}
+
+
+.loader-text {
+
+    margin-top:
+        14px;
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        .3em;
+
+    color:
+        var(--gold);
+
+}
+
+
+@keyframes symbolPulse {
+
+    0%,100% {
+
+        box-shadow:
+            0 0 0 rgba(198,166,107,0);
+
+    }
+
+    50% {
+
+        box-shadow:
+            0 0 70px
+            rgba(198,166,107,.15);
+
+    }
+
+}
+
+
+/* =========================================================
+   MAIN SITE
+========================================================= */
+
+.site {
+
+    opacity:
+        0;
+
+    transition:
+        opacity 1.4s ease;
+
+}
+
+
+.site.ready {
+
+    opacity:
+        1;
+
+}
+
+
+/* =========================================================
+   CONSTELLATION CANVAS
+========================================================= */
+
+#stars {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    pointer-events:
+        none;
+
+    z-index:
+        0;
+
+    opacity:
+        .65;
+
 }
 
 
@@ -236,107 +426,147 @@ img {
    NAVIGATION
 ========================================================= */
 
-header {
+.nav {
 
-    position: fixed;
+    position:
+        fixed;
 
-    top: 0;
+    top:
+        0;
 
-    left: 0;
+    left:
+        0;
 
-    width: 100%;
+    width:
+        100%;
 
-    z-index: 1000;
+    height:
+        82px;
 
     padding:
-        24px 5vw;
+        0 4vw;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
+
+    z-index:
+        500;
 
     transition:
-        .35s ease;
+        .5s var(--ease);
+
 }
 
 
-header.scrolled {
+.nav.scrolled {
+
+    height:
+        68px;
 
     background:
-        rgba(244,241,234,.88);
+        rgba(7,7,7,.75);
 
     backdrop-filter:
-        blur(15px);
+        blur(18px);
 
     border-bottom:
-        1px solid var(--line);
+        1px solid
+        var(--line);
+
 }
 
 
-.logo {
+.nav-logo {
 
-    font-family: "Manrope";
+    font-size:
+        17px;
 
-    font-size: 18px;
+    font-weight:
+        600;
 
-    font-weight: 700;
+    letter-spacing:
+        .28em;
 
-    letter-spacing: .25em;
+    padding-left:
+        .28em;
 
-    padding-left: .25em;
 }
 
 
-.navigation {
+.nav-center {
 
-    display: flex;
+    position:
+        absolute;
 
-    gap: 35px;
+    left:
+        50%;
 
-    font-size: 10px;
+    transform:
+        translateX(-50%);
 
-    text-transform: uppercase;
+    font-family:
+        "DM Mono";
 
-    letter-spacing: .17em;
+    font-size:
+        8px;
+
+    letter-spacing:
+        .25em;
+
+    color:
+        var(--muted);
+
 }
 
 
-.navigation a {
+.nav-right {
 
-    transition: .25s;
+    display:
+        flex;
+
+    gap:
+        26px;
+
+    align-items:
+        center;
+
 }
 
 
-.navigation a:hover {
+.nav-link {
 
-    color: var(--gold);
+    font-family:
+        "DM Mono";
+
+    font-size:
+        8px;
+
+    letter-spacing:
+        .18em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        #aaa;
+
+    transition:
+        .3s ease;
+
 }
 
 
-.nav-button {
+.nav-link:hover {
 
-    font-size: 10px;
+    color:
+        var(--gold);
 
-    text-transform: uppercase;
-
-    letter-spacing: .16em;
-}
-
-
-.nav-button span {
-
-    display: inline-block;
-
-    width: 7px;
-    height: 7px;
-
-    border-radius: 50%;
-
-    background: var(--gold);
-
-    margin-right: 8px;
 }
 
 
@@ -346,145 +576,257 @@ header.scrolled {
 
 .hero {
 
-    min-height: 100vh;
+    position:
+        relative;
 
-    display: grid;
+    min-height:
+        100svh;
 
-    grid-template-columns:
-        1fr
-        1fr;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
+
+    overflow:
+        hidden;
 
     padding:
-        120px 5vw 70px;
+        120px 4vw 60px;
 
-    gap: 70px;
-
-    background:
-        #f4f1ea;
 }
 
 
-.hero-left {
+.hero-content {
 
-    max-width: 800px;
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    width:
+        100%;
+
 }
 
 
-.hero-small {
+.hero-index {
 
-    font-size: 10px;
+    font-family:
+        "DM Mono";
 
-    text-transform: uppercase;
+    font-size:
+        9px;
 
-    letter-spacing: .25em;
+    color:
+        var(--gold);
 
-    color: var(--grey);
+    letter-spacing:
+        .25em;
 
-    margin-bottom: 35px;
+    margin-bottom:
+        35px;
+
 }
 
 
 .hero-title {
 
-    font-family: "Manrope";
-
     font-size:
         clamp(
-            65px,
-            8.5vw,
-            145px
+            75px,
+            13vw,
+            220px
         );
 
-    font-weight: 500;
+    font-weight:
+        500;
 
-    line-height: .82;
+    line-height:
+        .78;
 
-    letter-spacing: -.085em;
+    letter-spacing:
+        -.09em;
+
+    max-width:
+        1100px;
+
 }
 
 
-.hero-title span {
+.hero-title .outline {
 
-    color: #9d998f;
+    color:
+        transparent;
+
+    -webkit-text-stroke:
+        1px
+        rgba(241,238,231,.6);
+
 }
 
 
-.hero-description {
+.hero-subtitle {
 
-    max-width: 490px;
+    margin-top:
+        55px;
 
-    margin-top: 45px;
+    max-width:
+        470px;
 
-    font-size: 16px;
+    font-size:
+        15px;
 
-    line-height: 1.7;
+    line-height:
+        1.7;
 
-    color: #68645e;
+    color:
+        var(--muted);
+
 }
 
 
-.hero-button {
+.hero-image {
 
-    display: inline-block;
+    position:
+        absolute;
 
-    margin-top: 35px;
+    width:
+        min(47vw,720px);
 
-    background: #111;
+    height:
+        min(47vw,720px);
 
-    color: white;
+    right:
+        3vw;
 
-    padding:
-        16px 25px;
-
-    font-size: 10px;
-
-    text-transform: uppercase;
-
-    letter-spacing: .18em;
-
-    transition: .3s;
-}
-
-
-.hero-button:hover {
-
-    background: var(--gold);
-
-    color: #111;
-}
-
-
-.hero-right {
-
-    position: relative;
-
-    height: 650px;
-
-    overflow: hidden;
-
-    background: #080808;
-}
-
-
-.hero-right img {
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    transition:
-        transform 1.4s
-        cubic-bezier(.16,1,.3,1);
-}
-
-
-.hero-right:hover img {
+    top:
+        50%;
 
     transform:
-        scale(1.035);
+        translateY(-50%);
+
+    border-radius:
+        50%;
+
+    overflow:
+        hidden;
+
+    z-index:
+        1;
+
+    opacity:
+        .9;
+
+}
+
+
+.hero-image::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    border:
+        1px solid
+        rgba(198,166,107,.3);
+
+    border-radius:
+        50%;
+
+}
+
+
+.hero-image img {
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    transform:
+        scale(1.03);
+
+    filter:
+        saturate(.65)
+        contrast(1.05);
+
+}
+
+
+.hero-meta {
+
+    position:
+        absolute;
+
+    left:
+        4vw;
+
+    bottom:
+        40px;
+
+    display:
+        flex;
+
+    gap:
+        30px;
+
+    align-items:
+        center;
+
+    z-index:
+        4;
+
+}
+
+
+.meta-line {
+
+    width:
+        55px;
+
+    height:
+        1px;
+
+    background:
+        var(--gold);
+
+}
+
+
+.hero-scroll {
+
+    position:
+        absolute;
+
+    right:
+        4vw;
+
+    bottom:
+        40px;
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        8px;
+
+    letter-spacing:
+        .2em;
+
+    color:
+        var(--muted);
+
+    writing-mode:
+        vertical-rl;
+
 }
 
 
@@ -494,498 +836,998 @@ header.scrolled {
 
 .marquee {
 
-    overflow: hidden;
+    position:
+        relative;
 
-    white-space: nowrap;
+    z-index:
+        5;
 
-    background: #111;
+    overflow:
+        hidden;
 
-    color: #f4f1ea;
+    border-top:
+        1px solid
+        var(--line);
+
+    border-bottom:
+        1px solid
+        var(--line);
 
     padding:
-        20px 0;
+        18px 0;
+
+    background:
+        #090909;
+
 }
 
 
 .marquee-track {
 
-    display: inline-block;
+    display:
+        flex;
+
+    width:
+        max-content;
 
     animation:
-        marquee 25s linear infinite;
+        move 35s linear infinite;
+
 }
 
 
-.marquee span {
+.marquee-item {
 
-    margin:
+    font-family:
+        "DM Mono";
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        .22em;
+
+    color:
+        #aaa;
+
+    padding:
         0 35px;
 
-    font-family: "Manrope";
-
-    font-size: 13px;
-
-    text-transform: uppercase;
-
-    letter-spacing: .25em;
 }
 
 
-@keyframes marquee {
+.marquee-item b {
 
-    from {
-        transform: translateX(0);
-    }
+    color:
+        var(--gold);
+
+    font-weight:
+        400;
+
+}
+
+
+@keyframes move {
 
     to {
-        transform: translateX(-50%);
+
+        transform:
+            translateX(-50%);
+
     }
 
 }
 
 
 /* =========================================================
-   INTRO STATEMENT
+   SECTION SYSTEM
 ========================================================= */
 
 .section {
 
+    position:
+        relative;
+
+    z-index:
+        2;
+
     padding:
-        150px 5vw;
+        160px 4vw;
+
 }
 
 
-.section-label {
+.section-number {
 
-    font-size: 10px;
-
-    text-transform: uppercase;
-
-    letter-spacing: .25em;
-
-    color: var(--grey);
-}
-
-
-.big-statement {
-
-    max-width: 1100px;
-
-    margin-top: 35px;
-
-    font-family: "Manrope";
+    font-family:
+        "DM Mono";
 
     font-size:
-        clamp(
-            42px,
-            6.5vw,
-            95px
-        );
+        9px;
 
-    line-height: .97;
+    color:
+        var(--gold);
 
-    letter-spacing: -.075em;
+    letter-spacing:
+        .22em;
+
 }
 
 
-.big-statement span {
+.section-heading {
 
-    color: #99958d;
-}
+    margin-top:
+        35px;
 
-
-/* =========================================================
-   WORK
-========================================================= */
-
-.work-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        1.4fr
-        .6fr;
-
-    gap: 25px;
-
-    margin-top: 80px;
-}
-
-
-.work-card {
-
-    position: relative;
-
-    height: 620px;
-
-    overflow: hidden;
-
-    background: #ddd;
-}
-
-
-.work-card.small {
-
-    height: 470px;
-
-    margin-top: 150px;
-}
-
-
-.work-card img {
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    transition:
-        transform 1.2s
-        cubic-bezier(.16,1,.3,1);
-}
-
-
-.work-card:hover img {
-
-    transform: scale(1.06);
-}
-
-
-.work-overlay {
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            to bottom,
-            transparent 55%,
-            rgba(0,0,0,.7)
-        );
-}
-
-
-.work-info {
-
-    position: absolute;
-
-    left: 30px;
-    right: 30px;
-    bottom: 25px;
-
-    color: white;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: end;
-}
-
-
-.work-name {
-
-    font-family: "Manrope";
-
-    font-size: 30px;
-}
-
-
-.work-category {
-
-    font-size: 9px;
-
-    letter-spacing: .18em;
-
-    text-transform: uppercase;
-}
-
-
-/* =========================================================
-   EXPERTISE
-========================================================= */
-
-.expertise {
-
-    background: #111;
-
-    color: white;
-}
-
-
-.expertise .section-label {
-
-    color: #aaa;
-}
-
-
-.expertise-list {
-
-    margin-top: 75px;
-}
-
-
-.expertise-row {
-
-    display: grid;
-
-    grid-template-columns:
-        80px
-        1fr
-        1fr;
-
-    gap: 30px;
-
-    padding:
-        30px 0;
-
-    border-top:
-        1px solid rgba(255,255,255,.15);
-}
-
-
-.expertise-row:last-child {
-
-    border-bottom:
-        1px solid rgba(255,255,255,.15);
-}
-
-
-.expertise-number {
-
-    color: #777;
-
-    font-size: 11px;
-}
-
-
-.expertise-name {
-
-    font-family: "Manrope";
-
-    font-size:
-        clamp(27px,3.5vw,48px);
-
-    letter-spacing: -.05em;
-}
-
-
-.expertise-description {
-
-    max-width: 480px;
-
-    color: #999;
-
-    line-height: 1.65;
-}
-
-
-/* =========================================================
-   ZODIAC
-========================================================= */
-
-.zodiac {
-
-    padding:
-        170px 5vw;
-
-    text-align: center;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(190,158,91,.12),
-            transparent 40%
-        ),
-        #f4f1ea;
-}
-
-
-.zodiac-symbol {
-
-    font-family: Georgia, serif;
-
-    color: var(--gold);
-
-    font-size: 65px;
-
-    letter-spacing: .08em;
-}
-
-
-.zodiac h2 {
-
-    font-family: "Manrope";
+    max-width:
+        1050px;
 
     font-size:
         clamp(
             45px,
             7vw,
-            95px
+            105px
         );
 
-    line-height: .9;
+    line-height:
+        .91;
 
-    letter-spacing: -.07em;
+    letter-spacing:
+        -.075em;
 
-    margin-top: 30px;
+    font-weight:
+        500;
+
 }
 
 
-.zodiac p {
+.muted {
 
-    max-width: 650px;
+    color:
+        #696760;
 
-    margin:
-        30px auto 0;
-
-    color: var(--grey);
-
-    line-height: 1.7;
 }
 
 
 /* =========================================================
-   PROCESS
+   PROJECTS
 ========================================================= */
 
-.process-grid {
+.projects-head {
 
-    display: grid;
+    display:
+        flex;
 
-    grid-template-columns:
-        repeat(3,1fr);
+    justify-content:
+        space-between;
 
-    gap: 1px;
+    align-items:
+        end;
 
-    margin-top: 80px;
+    margin-bottom:
+        70px;
 
-    background: var(--line);
 }
 
 
-.process-item {
+.filters {
 
-    background: var(--cream);
+    display:
+        flex;
 
-    padding:
-        40px 30px;
+    gap:
+        10px;
 
-    min-height: 280px;
+    flex-wrap:
+        wrap;
+
 }
 
 
-.process-number {
+.filter {
 
-    color: var(--grey);
-
-    font-size: 11px;
-}
-
-
-.process-title {
-
-    font-family: "Manrope";
-
-    font-size: 32px;
-
-    margin-top: 90px;
-
-    letter-spacing: -.05em;
-}
-
-
-.process-text {
-
-    color: var(--grey);
-
-    line-height: 1.6;
-
-    margin-top: 15px;
-}
-
-
-/* =========================================================
-   CTA
-========================================================= */
-
-.cta {
-
-    padding:
-        180px 5vw;
-
-    background: #111;
-
-    color: white;
-
-    text-align: center;
-}
-
-
-.cta .section-label {
-
-    color: var(--gold);
-}
-
-
-.cta-title {
-
-    font-family: "Manrope";
-
-    font-size:
-        clamp(
-            65px,
-            12vw,
-            170px
-        );
-
-    line-height: .8;
-
-    letter-spacing: -.09em;
-
-    margin-top: 35px;
-}
-
-
-.cta-title span {
-
-    color: #6d6a65;
-}
-
-
-.cta-button {
-
-    display: inline-block;
-
-    margin-top: 60px;
-
-    padding:
-        17px 28px;
+    background:
+        transparent;
 
     border:
         1px solid
-        rgba(255,255,255,.3);
+        var(--line);
 
-    border-radius: 100px;
+    color:
+        var(--muted);
 
-    font-size: 10px;
+    padding:
+        9px 15px;
 
-    text-transform: uppercase;
+    border-radius:
+        100px;
 
-    letter-spacing: .2em;
+    font-family:
+        "DM Mono";
 
-    transition: .3s;
+    font-size:
+        8px;
+
+    letter-spacing:
+        .12em;
+
+    cursor:
+        none;
+
+    transition:
+        .3s ease;
+
 }
 
 
-.cta-button:hover {
+.filter:hover,
+.filter.active {
 
-    background: var(--gold);
+    color:
+        #111;
 
-    color: #111;
+    background:
+        var(--gold);
 
-    border-color: var(--gold);
+    border-color:
+        var(--gold);
+
+}
+
+
+.project-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(12,1fr);
+
+    gap:
+        20px;
+
+}
+
+
+.project {
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    background:
+        #111;
+
+    min-height:
+        580px;
+
+    grid-column:
+        span 7;
+
+    cursor:
+        none;
+
+}
+
+
+.project:nth-child(2) {
+
+    grid-column:
+        span 5;
+
+}
+
+
+.project:nth-child(3) {
+
+    grid-column:
+        span 5;
+
+}
+
+
+.project:nth-child(4) {
+
+    grid-column:
+        span 7;
+
+}
+
+
+.project:nth-child(5) {
+
+    grid-column:
+        span 8;
+
+}
+
+
+.project:nth-child(6) {
+
+    grid-column:
+        span 4;
+
+}
+
+
+.project-image {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    transition:
+        transform 1.2s var(--ease);
+
+    filter:
+        grayscale(.1)
+        contrast(1.05);
+
+}
+
+
+.project:hover .project-image {
+
+    transform:
+        scale(1.08);
+
+}
+
+
+.project-overlay {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent 45%,
+            rgba(0,0,0,.85)
+        );
+
+}
+
+
+.project-info {
+
+    position:
+        absolute;
+
+    left:
+        28px;
+
+    right:
+        28px;
+
+    bottom:
+        25px;
+
+    z-index:
+        2;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        end;
+
+}
+
+
+.project-name {
+
+    font-size:
+        32px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        -.05em;
+
+}
+
+
+.project-category {
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        8px;
+
+    color:
+        #bbb;
+
+    letter-spacing:
+        .16em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* =========================================================
+   EXPERIMENTAL ABOUT
+========================================================= */
+
+.about {
+
+    min-height:
+        90vh;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+}
+
+
+.about-layout {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        10vw;
+
+    width:
+        100%;
+
+}
+
+
+.about-copy {
+
+    font-size:
+        clamp(
+            35px,
+            5vw,
+            72px
+        );
+
+    line-height:
+        .98;
+
+    letter-spacing:
+        -.065em;
+
+}
+
+
+.about-copy span {
+
+    color:
+        #66635d;
+
+}
+
+
+.about-description {
+
+    align-self:
+        end;
+
+    max-width:
+        450px;
+
+    color:
+        var(--muted);
+
+    line-height:
+        1.8;
+
+    font-size:
+        14px;
+
+}
+
+
+/* =========================================================
+   DISCIPLINES
+========================================================= */
+
+.disciplines {
+
+    background:
+        #101010;
+
+}
+
+
+.discipline-list {
+
+    margin-top:
+        80px;
+
+}
+
+
+.discipline {
+
+    position:
+        relative;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        70px 1fr auto;
+
+    align-items:
+        center;
+
+    gap:
+        25px;
+
+    padding:
+        35px 0;
+
+    border-top:
+        1px solid
+        var(--line);
+
+    transition:
+        padding .5s var(--ease);
+
+}
+
+
+.discipline:last-child {
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+}
+
+
+.discipline:hover {
+
+    padding-left:
+        20px;
+
+}
+
+
+.discipline-number {
+
+    font-family:
+        "DM Mono";
+
+    color:
+        var(--gold);
+
+    font-size:
+        9px;
+
+}
+
+
+.discipline-name {
+
+    font-size:
+        clamp(
+            32px,
+            5vw,
+            72px
+        );
+
+    font-weight:
+        400;
+
+    letter-spacing:
+        -.06em;
+
+}
+
+
+.discipline-arrow {
+
+    font-size:
+        22px;
+
+    color:
+        var(--muted);
+
+    transition:
+        transform .4s var(--ease),
+        color .3s;
+
+}
+
+
+.discipline:hover
+.discipline-arrow {
+
+    transform:
+        translate(8px,-8px);
+
+    color:
+        var(--gold);
+
+}
+
+
+/* =========================================================
+   ZODIAC SECTION
+========================================================= */
+
+.zodiac {
+
+    min-height:
+        100vh;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    text-align:
+        center;
+
+    overflow:
+        hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(198,166,107,.1),
+            transparent 35%
+        );
+
+}
+
+
+.zodiac-ring {
+
+    position:
+        absolute;
+
+    width:
+        min(75vw,850px);
+
+    height:
+        min(75vw,850px);
+
+    border:
+        1px solid
+        rgba(198,166,107,.16);
+
+    border-radius:
+        50%;
+
+    animation:
+        rotate 50s linear infinite;
+
+}
+
+
+.zodiac-ring::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    width:
+        65%;
+
+    height:
+        65%;
+
+    top:
+        17.5%;
+
+    left:
+        17.5%;
+
+    border:
+        1px dashed
+        rgba(198,166,107,.14);
+
+    border-radius:
+        50%;
+
+}
+
+
+@keyframes rotate {
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+}
+
+
+.zodiac-content {
+
+    position:
+        relative;
+
+    z-index:
+        2;
+
+}
+
+
+.zodiac-symbol {
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size:
+        80px;
+
+    color:
+        var(--gold2);
+
+    letter-spacing:
+        -.1em;
+
+}
+
+
+.zodiac-title {
+
+    font-size:
+        clamp(
+            55px,
+            9vw,
+            140px
+        );
+
+    line-height:
+        .8;
+
+    letter-spacing:
+        -.09em;
+
+    margin-top:
+        25px;
+
+}
+
+
+.zodiac-title span {
+
+    color:
+        #55524c;
+
+}
+
+
+.zodiac-copy {
+
+    max-width:
+        570px;
+
+    margin:
+        45px auto 0;
+
+    color:
+        var(--muted);
+
+    line-height:
+        1.8;
+
+}
+
+
+/* =========================================================
+   NUMBERS
+========================================================= */
+
+.numbers {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    border-top:
+        1px solid
+        var(--line);
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+}
+
+
+.number {
+
+    padding:
+        60px 35px;
+
+    border-right:
+        1px solid
+        var(--line);
+
+}
+
+
+.number:last-child {
+
+    border-right:
+        none;
+
+}
+
+
+.number-value {
+
+    font-size:
+        clamp(
+            45px,
+            6vw,
+            80px
+        );
+
+    letter-spacing:
+        -.07em;
+
+}
+
+
+.number-label {
+
+    margin-top:
+        15px;
+
+    font-family:
+        "DM Mono";
+
+    color:
+        var(--muted);
+
+    font-size:
+        8px;
+
+    letter-spacing:
+        .15em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact {
+
+    min-height:
+        90vh;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    text-align:
+        center;
+
+}
+
+
+.contact-title {
+
+    font-size:
+        clamp(
+            70px,
+            13vw,
+            200px
+        );
+
+    line-height:
+        .75;
+
+    letter-spacing:
+        -.1em;
+
+}
+
+
+.contact-title span {
+
+    color:
+        #55524c;
+
+}
+
+
+.contact-email {
+
+    display:
+        inline-block;
+
+    margin-top:
+        55px;
+
+    padding:
+        18px 30px;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:
+        100px;
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        .15em;
+
+    transition:
+        .4s var(--ease);
+
+}
+
+
+.contact-email:hover {
+
+    background:
+        var(--gold);
+
+    color:
+        #111;
+
+    border-color:
+        var(--gold);
+
+    transform:
+        scale(1.04);
+
 }
 
 
@@ -995,26 +1837,61 @@ header.scrolled {
 
 footer {
 
-    background: #111;
+    padding:
+        25px 4vw;
 
-    color: #777;
+    display:
+        flex;
+
+    justify-content:
+        space-between;
 
     border-top:
         1px solid
-        rgba(255,255,255,.12);
+        var(--line);
 
-    padding:
-        25px 5vw;
+    font-family:
+        "DM Mono";
 
-    display: flex;
+    font-size:
+        8px;
 
-    justify-content: space-between;
+    letter-spacing:
+        .16em;
 
-    font-size: 9px;
+    color:
+        #666;
 
-    letter-spacing: .16em;
+}
 
-    text-transform: uppercase;
+
+/* =========================================================
+   REVEAL ANIMATION
+========================================================= */
+
+.reveal {
+
+    opacity:
+        0;
+
+    transform:
+        translateY(60px);
+
+    transition:
+        opacity 1s var(--ease),
+        transform 1s var(--ease);
+
+}
+
+
+.reveal.visible {
+
+    opacity:
+        1;
+
+    transform:
+        translateY(0);
+
 }
 
 
@@ -1024,71 +1901,179 @@ footer {
 
 @media(max-width:900px) {
 
-    .navigation {
+    body {
 
-        display: none;
+        cursor:
+            auto;
+
+    }
+
+
+    .cursor,
+    .cursor-ring {
+
+        display:
+            none;
+
+    }
+
+
+    .nav-center,
+    .nav-right .nav-link {
+
+        display:
+            none;
+
     }
 
 
     .hero {
 
-        grid-template-columns: 1fr;
+        padding:
+            130px 6vw 60px;
 
-        padding-top: 130px;
+        align-items:
+            flex-start;
+
     }
 
 
-    .hero-right {
+    .hero-image {
 
-        height: 480px;
+        position:
+            relative;
+
+        width:
+            85vw;
+
+        height:
+            85vw;
+
+        right:
+            auto;
+
+        top:
+            auto;
+
+        transform:
+            none;
+
+        margin:
+            70px auto 0;
+
     }
 
 
-    .work-grid {
+    .hero-title {
 
-        grid-template-columns: 1fr;
+        font-size:
+            clamp(
+                70px,
+                18vw,
+                130px
+            );
+
     }
 
 
-    .work-card {
+    .section {
 
-        height: 480px;
+        padding:
+            110px 6vw;
+
     }
 
 
-    .work-card.small {
+    .projects-head {
 
-        height: 400px;
+        display:
+            block;
 
-        margin-top: 0;
     }
 
 
-    .expertise-row {
+    .filters {
+
+        margin-top:
+            30px;
+
+    }
+
+
+    .project-grid {
+
+        display:
+            block;
+
+    }
+
+
+    .project {
+
+        min-height:
+            480px;
+
+        margin-bottom:
+            15px;
+
+    }
+
+
+    .about-layout {
 
         grid-template-columns:
-            40px
             1fr;
+
+        gap:
+            70px;
+
     }
 
 
-    .expertise-description {
+    .discipline {
 
-        grid-column: 2;
+        grid-template-columns:
+            35px 1fr auto;
+
     }
 
 
-    .process-grid {
+    .numbers {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .number {
+
+        border-bottom:
+            1px solid
+            var(--line);
+
+    }
+
+
+    .zodiac-ring {
+
+        width:
+            130vw;
+
+        height:
+            130vw;
+
     }
 
 
     footer {
 
-        flex-direction: column;
+        flex-direction:
+            column;
 
-        gap: 15px;
+        gap:
+            15px;
+
     }
 
 }
@@ -1101,24 +2086,42 @@ footer {
 <body>
 
 
-<!-- ========================================================
-     TAURI INTRO
-========================================================= -->
+<!-- =======================================================
+     CURSOR
+======================================================= -->
 
-<div id="intro">
+<div class="cursor"></div>
 
-    <div class="intro-inner">
+<div class="cursor-ring"></div>
 
-        <div class="intro-symbol">
+
+
+<!-- =======================================================
+     CONSTELLATION BACKGROUND
+======================================================= -->
+
+<canvas id="stars"></canvas>
+
+
+
+<!-- =======================================================
+     LOADER
+======================================================= -->
+
+<div class="loader" id="loader">
+
+    <div class="loader-content">
+
+        <div class="loader-symbol">
             ♉︎♑︎
         </div>
 
-        <div class="intro-name">
+        <div class="loader-name">
             TAURI
         </div>
 
-        <div class="intro-sub">
-            Multidisciplinary Product Design Studio
+        <div class="loader-text">
+            PRODUCT / OBJECT / EXPERIENCE
         </div>
 
     </div>
@@ -1127,161 +2130,181 @@ footer {
 
 
 
-<!-- ========================================================
-     WEBSITE
-========================================================= -->
+<!-- =======================================================
+     SITE
+======================================================= -->
 
-<div id="site">
+<div class="site" id="site">
 
 
-<!-- ========================================================
+
+<!-- =======================================================
      NAVIGATION
-========================================================= -->
+======================================================= -->
 
-<header id="header">
+<header class="nav" id="nav">
 
-    <a href="#" class="logo">
+    <a href="#" class="nav-logo">
         TAURI
     </a>
 
 
-    <nav class="navigation">
+    <div class="nav-center">
+        DESIGN / DEVELOPMENT / VISUALIZATION
+    </div>
 
-        <a href="#work">
+
+    <div class="nav-right">
+
+        <a
+            class="nav-link"
+            href="#work"
+        >
             Work
         </a>
 
-        <a href="#expertise">
-            Expertise
+        <a
+            class="nav-link"
+            href="#about"
+        >
+            Studio
         </a>
 
-        <a href="#process">
-            Process
-        </a>
-
-        <a href="#about">
-            About
-        </a>
-
-        <a href="#contact">
+        <a
+            class="nav-link"
+            href="#contact"
+        >
             Contact
         </a>
 
-    </nav>
-
-
-    <a
-        href="#contact"
-        class="nav-button"
-    >
-
-        <span></span>
-
-        Start a project
-
-    </a>
+    </div>
 
 </header>
 
 
 
-<!-- ========================================================
+<!-- =======================================================
      HERO
-========================================================= -->
+======================================================= -->
 
 <section class="hero">
 
+    <div class="hero-content">
 
-    <div class="hero-left">
 
-        <div class="hero-small">
-            Multidisciplinary Product Design Studio
+        <div class="hero-index">
+            00 / TAURI
         </div>
 
 
         <h1 class="hero-title">
 
-            WE MAKE
+            DESIGN
 
             <br>
 
-            <span>
-                PRODUCTS
+            <span class="outline">
+                BEYOND
             </span>
 
             <br>
 
-            MATTER.
+            PRODUCTS.
 
         </h1>
 
 
-        <p class="hero-description">
+        <p class="hero-subtitle">
 
-            TAURI is a multidisciplinary design studio
-            working across product, industrial design,
-            packaging, 3D visualization and brand
-            experiences.
+            TAURI is a multidisciplinary product
+            design studio exploring the intersection
+            of objects, technology, materials,
+            identity and visual culture.
 
         </p>
 
 
-        <a
-            href="#work"
-            class="hero-button"
-        >
-
-            Explore our work →
-
-        </a>
-
     </div>
 
 
-
-    <!-- YOUR ZODIAC IMAGE -->
-
-    <div class="hero-right">
+    <div class="hero-image">
 
         <img
             src="tauri-zodiac-hero.png"
-            alt="Taurus and Capricorn constellation — TAURI"
+            alt="TAURI Taurus Capricorn constellation"
         >
 
     </div>
 
+
+    <div class="hero-meta">
+
+        <div class="meta-line"></div>
+
+        <div class="hero-index">
+            TAURUS × CAPRICORN
+        </div>
+
+    </div>
+
+
+    <div class="hero-scroll">
+
+        SCROLL TO EXPLORE ↓
+
+    </div>
 
 </section>
 
 
 
-<!-- ========================================================
+<!-- =======================================================
      MARQUEE
-========================================================= -->
+======================================================= -->
 
 <div class="marquee">
 
     <div class="marquee-track">
 
-        <span>Industrial Design</span>
+        <div class="marquee-item">
+            INDUSTRIAL DESIGN <b>✦</b>
+        </div>
 
-        <span>Product Design</span>
+        <div class="marquee-item">
+            PRODUCT DEVELOPMENT <b>✦</b>
+        </div>
 
-        <span>3D Visualization</span>
+        <div class="marquee-item">
+            3D VISUALIZATION <b>✦</b>
+        </div>
 
-        <span>Packaging</span>
+        <div class="marquee-item">
+            PACKAGING <b>✦</b>
+        </div>
 
-        <span>Brand Experience</span>
+        <div class="marquee-item">
+            BRAND EXPERIENCE <b>✦</b>
+        </div>
 
-        <span>Industrial Design</span>
+        <div class="marquee-item">
+            INDUSTRIAL DESIGN <b>✦</b>
+        </div>
 
-        <span>Product Design</span>
+        <div class="marquee-item">
+            PRODUCT DEVELOPMENT <b>✦</b>
+        </div>
 
-        <span>3D Visualization</span>
+        <div class="marquee-item">
+            3D VISUALIZATION <b>✦</b>
+        </div>
 
-        <span>Packaging</span>
+        <div class="marquee-item">
+            PACKAGING <b>✦</b>
+        </div>
 
-        <span>Brand Experience</span>
+        <div class="marquee-item">
+            BRAND EXPERIENCE <b>✦</b>
+        </div>
 
     </div>
 
@@ -1289,66 +2312,158 @@ footer {
 
 
 
-<!-- ========================================================
-     INTRO
-========================================================= -->
+<!-- =======================================================
+     INTRODUCTION
+======================================================= -->
 
-<section class="section" id="about">
+<section
+    class="section about reveal"
+    id="about"
+>
 
-    <div class="section-label">
-        01 — About TAURI
+    <div class="about-layout">
+
+
+        <div>
+
+            <div class="section-number">
+                01 / STUDIO
+            </div>
+
+
+            <h2 class="about-copy">
+
+                We design things
+
+                <span>
+                    people interact
+                    with, live with
+                    and remember.
+                </span>
+
+            </h2>
+
+        </div>
+
+
+        <div class="about-description">
+
+            TAURI operates between industrial design,
+            product development, CGI, packaging and
+            brand experience.
+
+            <br><br>
+
+            We don't believe in designing inside
+            categories. A product can be a machine,
+            an object, a system, a story or all of
+            them at once.
+
+            <br><br>
+
+            Our job is to find the idea at the centre
+            and make it impossible to ignore.
+
+        </div>
+
+
     </div>
-
-
-    <h2 class="big-statement">
-
-        We turn ideas into
-        <span>
-            physical products,
-            meaningful experiences
-            and visual worlds.
-        </span>
-
-    </h2>
 
 </section>
 
 
 
-<!-- ========================================================
-     WORK
-========================================================= -->
+<!-- =======================================================
+     PROJECTS
+======================================================= -->
 
-<section class="section" id="work">
+<section
+    class="section reveal"
+    id="work"
+>
 
-    <div class="section-label">
-        02 — Recent Projects
+    <div class="projects-head">
+
+        <div>
+
+            <div class="section-number">
+                02 / SELECTED WORK
+            </div>
+
+            <h2 class="section-heading">
+
+                Objects
+                <span class="muted">
+                    with intent.
+                </span>
+
+            </h2>
+
+        </div>
+
+
+        <div class="filters">
+
+            <button
+                class="filter active"
+                data-filter="all"
+            >
+                All
+            </button>
+
+            <button
+                class="filter"
+                data-filter="product"
+            >
+                Product
+            </button>
+
+            <button
+                class="filter"
+                data-filter="object"
+            >
+                Object
+            </button>
+
+            <button
+                class="filter"
+                data-filter="visual"
+            >
+                Visual
+            </button>
+
+        </div>
+
     </div>
 
 
-    <div class="work-grid">
+
+    <div class="project-grid">
 
 
         <!-- PROJECT 01 -->
 
-        <article class="work-card">
+        <article
+            class="project"
+            data-category="product"
+        >
 
             <img
+                class="project-image"
                 src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1800&q=90"
-                alt="Consumer product design"
+                alt="Product design"
             >
 
-            <div class="work-overlay"></div>
+            <div class="project-overlay"></div>
 
+            <div class="project-info">
 
-            <div class="work-info">
-
-                <div class="work-name">
-                    FORMA
+                <div class="project-name">
+                    FORM / 01
                 </div>
 
-                <div class="work-category">
-                    Consumer Technology
+                <div class="project-category">
+                    Product Design
                 </div>
 
             </div>
@@ -1359,24 +2474,151 @@ footer {
 
         <!-- PROJECT 02 -->
 
-        <article class="work-card small">
+        <article
+            class="project"
+            data-category="object"
+        >
 
             <img
-                src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1400&q=90"
-                alt="Furniture design"
+                class="project-image"
+                src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1600&q=90"
+                alt="Furniture product"
             >
 
-            <div class="work-overlay"></div>
+            <div class="project-overlay"></div>
 
+            <div class="project-info">
 
-            <div class="work-info">
-
-                <div class="work-name">
+                <div class="project-name">
                     ARC
                 </div>
 
-                <div class="work-category">
-                    Furniture
+                <div class="project-category">
+                    Object Design
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- PROJECT 03 -->
+
+        <article
+            class="project"
+            data-category="visual"
+        >
+
+            <img
+                class="project-image"
+                src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1600&q=90"
+                alt="Technology product"
+            >
+
+            <div class="project-overlay"></div>
+
+            <div class="project-info">
+
+                <div class="project-name">
+                    SIGNAL
+                </div>
+
+                <div class="project-category">
+                    Visual Direction
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- PROJECT 04 -->
+
+        <article
+            class="project"
+            data-category="product"
+        >
+
+            <img
+                class="project-image"
+                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1800&q=90"
+                alt="Consumer product"
+            >
+
+            <div class="project-overlay"></div>
+
+            <div class="project-info">
+
+                <div class="project-name">
+                    SONIC
+                </div>
+
+                <div class="project-category">
+                    Consumer Product
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- PROJECT 05 -->
+
+        <article
+            class="project"
+            data-category="object"
+        >
+
+            <img
+                class="project-image"
+                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1800&q=90"
+                alt="Watch product"
+            >
+
+            <div class="project-overlay"></div>
+
+            <div class="project-info">
+
+                <div class="project-name">
+                    TIME / 01
+                </div>
+
+                <div class="project-category">
+                    Precision Object
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- PROJECT 06 -->
+
+        <article
+            class="project"
+            data-category="visual"
+        >
+
+            <img
+                class="project-image"
+                src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1400&q=90"
+                alt="Interior object"
+            >
+
+            <div class="project-overlay"></div>
+
+            <div class="project-info">
+
+                <div class="project-name">
+                    SPACE
+                </div>
+
+                <div class="project-category">
+                    Visual Experience
                 </div>
 
             </div>
@@ -1390,394 +2632,342 @@ footer {
 
 
 
-<!-- ========================================================
-     EXPERTISE
-========================================================= -->
+<!-- =======================================================
+     DISCIPLINES
+======================================================= -->
 
 <section
-    class="section expertise"
-    id="expertise"
+    class="section disciplines reveal"
+    id="services"
 >
 
-    <div class="section-label">
-        03 — Areas of Expertise
+    <div class="section-number">
+        03 / CAPABILITIES
     </div>
 
 
-    <div class="expertise-list">
-
-
-        <div class="expertise-row">
-
-            <div class="expertise-number">
-                01
-            </div>
-
-            <h3 class="expertise-name">
-                Industrial Design
-            </h3>
-
-            <p class="expertise-description">
-
-                From early form exploration
-                to detailed product development,
-                we create products designed
-                around people.
-
-            </p>
-
-        </div>
-
-
-
-        <div class="expertise-row">
-
-            <div class="expertise-number">
-                02
-            </div>
-
-            <h3 class="expertise-name">
-                Product Development
-            </h3>
-
-            <p class="expertise-description">
-
-                Concept development,
-                CAD, CMF, prototyping,
-                refinement and manufacturing
-                support.
-
-            </p>
-
-        </div>
-
-
-
-        <div class="expertise-row">
-
-            <div class="expertise-number">
-                03
-            </div>
-
-            <h3 class="expertise-name">
-                3D & CGI
-            </h3>
-
-            <p class="expertise-description">
-
-                Photorealistic product
-                visualization, animation,
-                campaigns and digital
-                storytelling.
-
-            </p>
-
-        </div>
-
-
-
-        <div class="expertise-row">
-
-            <div class="expertise-number">
-                04
-            </div>
-
-            <h3 class="expertise-name">
-                Packaging
-            </h3>
-
-            <p class="expertise-description">
-
-                Packaging systems that
-                translate product strategy
-                into physical and visual
-                experiences.
-
-            </p>
-
-        </div>
-
-
-
-        <div class="expertise-row">
-
-            <div class="expertise-number">
-                05
-            </div>
-
-            <h3 class="expertise-name">
-                Brand Experience
-            </h3>
-
-            <p class="expertise-description">
-
-                Identity, storytelling and
-                visual systems that extend
-                the product into a complete
-                brand world.
-
-            </p>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- ========================================================
-     ZODIAC BRAND STORY
-========================================================= -->
-
-<section class="zodiac">
-
-    <div class="zodiac-symbol">
-        ♉︎ × ♑︎
-    </div>
-
-
-    <div class="section-label">
-        Why TAURI
-    </div>
-
-
-    <h2>
-
-        Grounded by Taurus.<br>
-
-        Driven by Capricorn.
-
-    </h2>
-
-
-    <p>
-
-        Taurus represents materiality,
-        craftsmanship and appreciation
-        for things made beautifully.
-
-        <br><br>
-
-        Capricorn represents ambition,
-        structure and long-term thinking.
-
-        <br><br>
-
-        TAURI brings both together
-        to create products that are
-        considered, useful and built
-        to last.
-
-    </p>
-
-</section>
-
-
-
-<!-- ========================================================
-     PROCESS
-========================================================= -->
-
-<section
-    class="section"
-    id="process"
->
-
-    <div class="section-label">
-        04 — Our Process
-    </div>
-
-
-    <div class="process-grid">
-
-
-        <div class="process-item">
-
-            <div class="process-number">
-                01
-            </div>
-
-            <h3 class="process-title">
-                Discover
-            </h3>
-
-            <p class="process-text">
-
-                Understand the problem,
-                users, market and opportunity.
-
-            </p>
-
-        </div>
-
-
-
-        <div class="process-item">
-
-            <div class="process-number">
-                02
-            </div>
-
-            <h3 class="process-title">
-                Design
-            </h3>
-
-            <p class="process-text">
-
-                Explore form, function,
-                materials and experience.
-
-            </p>
-
-        </div>
-
-
-
-        <div class="process-item">
-
-            <div class="process-number">
-                03
-            </div>
-
-            <h3 class="process-title">
-                Develop
-            </h3>
-
-            <p class="process-text">
-
-                Refine concepts through CAD,
-                visualization and prototypes.
-
-            </p>
-
-        </div>
-
-
-
-        <div class="process-item">
-
-            <div class="process-number">
-                04
-            </div>
-
-            <h3 class="process-title">
-                Validate
-            </h3>
-
-            <p class="process-text">
-
-                Test, iterate and make the
-                product ready for reality.
-
-            </p>
-
-        </div>
-
-
-
-        <div class="process-item">
-
-            <div class="process-number">
-                05
-            </div>
-
-            <h3 class="process-title">
-                Deliver
-            </h3>
-
-            <p class="process-text">
-
-                Prepare final assets,
-                specifications and production
-                documentation.
-
-            </p>
-
-        </div>
-
-
-
-        <div class="process-item">
-
-            <div class="process-number">
-                06
-            </div>
-
-            <h3 class="process-title">
-                Launch
-            </h3>
-
-            <p class="process-text">
-
-                Bring the product into the
-                world with a strong visual
-                and brand story.
-
-            </p>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- ========================================================
-     CONTACT
-========================================================= -->
-
-<section
-    class="cta"
-    id="contact"
->
-
-    <div class="section-label">
-        Have an idea?
-    </div>
-
-
-    <h2 class="cta-title">
-
-        LET'S BUILD
-
-        <br>
-
-        <span>
-            SOMETHING.
+    <h2 class="section-heading">
+
+        One studio.
+        <span class="muted">
+            Many disciplines.
         </span>
 
     </h2>
 
 
-    <a
-        href="mailto:hello@tauri.design"
-        class="cta-button"
-    >
+    <div class="discipline-list">
 
-        Start a conversation →
 
-    </a>
+        <div class="discipline">
+
+            <div class="discipline-number">
+                01
+            </div>
+
+            <div class="discipline-name">
+                Industrial Design
+            </div>
+
+            <div class="discipline-arrow">
+                ↗
+            </div>
+
+        </div>
+
+
+        <div class="discipline">
+
+            <div class="discipline-number">
+                02
+            </div>
+
+            <div class="discipline-name">
+                Product Development
+            </div>
+
+            <div class="discipline-arrow">
+                ↗
+            </div>
+
+        </div>
+
+
+        <div class="discipline">
+
+            <div class="discipline-number">
+                03
+            </div>
+
+            <div class="discipline-name">
+                3D / CGI
+            </div>
+
+            <div class="discipline-arrow">
+                ↗
+            </div>
+
+        </div>
+
+
+        <div class="discipline">
+
+            <div class="discipline-number">
+                04
+            </div>
+
+            <div class="discipline-name">
+                Packaging
+            </div>
+
+            <div class="discipline-arrow">
+                ↗
+            </div>
+
+        </div>
+
+
+        <div class="discipline">
+
+            <div class="discipline-number">
+                05
+            </div>
+
+            <div class="discipline-name">
+                Brand Systems
+            </div>
+
+            <div class="discipline-arrow">
+                ↗
+            </div>
+
+        </div>
+
+
+        <div class="discipline">
+
+            <div class="discipline-number">
+                06
+            </div>
+
+            <div class="discipline-name">
+                Art Direction
+            </div>
+
+            <div class="discipline-arrow">
+                ↗
+            </div>
+
+        </div>
+
+
+    </div>
 
 </section>
 
 
 
-<!-- ========================================================
+<!-- =======================================================
+     ZODIAC
+======================================================= -->
+
+<section class="section zodiac reveal">
+
+
+    <div class="zodiac-ring"></div>
+
+
+    <div class="zodiac-content">
+
+
+        <div class="zodiac-symbol">
+            ♉︎ × ♑︎
+        </div>
+
+
+        <div class="section-number">
+            THE TAURI CODE
+        </div>
+
+
+        <h2 class="zodiac-title">
+
+            GROUNDED.
+
+            <br>
+
+            <span>
+                AMBITIOUS.
+            </span>
+
+        </h2>
+
+
+        <p class="zodiac-copy">
+
+            Taurus gives us materiality,
+            patience and appreciation
+            for craft.
+
+            <br><br>
+
+            Capricorn gives us structure,
+            ambition and the discipline
+            to take an idea all the way.
+
+            <br><br>
+
+            TAURI exists where those
+            two forces meet.
+
+        </p>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     NUMBERS
+======================================================= -->
+
+<section class="section reveal">
+
+
+    <div class="numbers">
+
+
+        <div class="number">
+
+            <div
+                class="number-value"
+                data-target="20"
+            >
+                0+
+            </div>
+
+            <div class="number-label">
+                Projects
+            </div>
+
+        </div>
+
+
+        <div class="number">
+
+            <div
+                class="number-value"
+                data-target="12"
+            >
+                0+
+            </div>
+
+            <div class="number-label">
+                Product Categories
+            </div>
+
+        </div>
+
+
+        <div class="number">
+
+            <div
+                class="number-value"
+                data-target="08"
+            >
+                0
+            </div>
+
+            <div class="number-label">
+                Disciplines
+            </div>
+
+        </div>
+
+
+        <div class="number">
+
+            <div
+                class="number-value"
+                data-target="100"
+            >
+                0%
+            </div>
+
+            <div class="number-label">
+                Obsession
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =======================================================
+     CONTACT
+======================================================= -->
+
+<section
+    class="contact reveal"
+    id="contact"
+>
+
+
+    <div>
+
+
+        <div class="section-number">
+            04 / START SOMETHING
+        </div>
+
+
+        <h2 class="contact-title">
+
+            HAVE
+
+            <br>
+
+            <span>
+                AN IDEA?
+            </span>
+
+        </h2>
+
+
+        <a
+            href="mailto:hello@tauri.design"
+            class="contact-email magnetic"
+        >
+            HELLO@TAURI.DESIGN →
+        </a>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =======================================================
      FOOTER
-========================================================= -->
+======================================================= -->
 
 <footer>
 
     <div>
-        TAURI — Multidisciplinary Product Design
+        TAURI / MULTIDISCIPLINARY DESIGN STUDIO
     </div>
 
     <div>
-        © 2026 TAURI
+        INDIA / 2026
     </div>
 
 </footer>
@@ -1787,37 +2977,102 @@ footer {
 
 
 
-<!-- ========================================================
-     JAVASCRIPT
-========================================================= -->
-
 <script>
+
+/* =========================================================
+   CURSOR
+========================================================= */
+
+const cursor =
+    document.querySelector(".cursor");
+
+const ring =
+    document.querySelector(".cursor-ring");
+
+
+let mouseX = 0;
+let mouseY = 0;
+
+let ringX = 0;
+let ringY = 0;
+
+
+document.addEventListener(
+    "mousemove",
+    e => {
+
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        cursor.style.left =
+            mouseX + "px";
+
+        cursor.style.top =
+            mouseY + "px";
+
+    }
+);
+
+
+function animateCursor() {
+
+    ringX +=
+        (mouseX - ringX) * .14;
+
+    ringY +=
+        (mouseY - ringY) * .14;
+
+    ring.style.left =
+        ringX + "px";
+
+    ring.style.top =
+        ringY + "px";
+
+    requestAnimationFrame(
+        animateCursor
+    );
+
+}
+
+
+animateCursor();
+
 
 
 /* =========================================================
-   INTRO ANIMATION
+   HOVER CURSOR
 ========================================================= */
 
-window.addEventListener(
-    "load",
-    function() {
-
-        setTimeout(
-            function() {
-
-                document
-                    .getElementById("intro")
-                    .classList
-                    .add("hide");
+const hoverElements =
+    document.querySelectorAll(
+        "a, button, .project, .discipline"
+    );
 
 
-                document
-                    .getElementById("site")
-                    .classList
-                    .add("show");
+hoverElements.forEach(
+    el => {
 
-            },
-            2600
+        el.addEventListener(
+            "mouseenter",
+            () => {
+
+                document.body.classList.add(
+                    "hovering"
+                );
+
+            }
+        );
+
+
+        el.addEventListener(
+            "mouseleave",
+            () => {
+
+                document.body.classList.remove(
+                    "hovering"
+                );
+
+            }
         );
 
     }
@@ -1826,28 +3081,59 @@ window.addEventListener(
 
 
 /* =========================================================
-   NAVIGATION ON SCROLL
+   LOADER
 ========================================================= */
 
 window.addEventListener(
+    "load",
+    () => {
+
+        setTimeout(
+            () => {
+
+                document
+                    .getElementById("loader")
+                    .classList
+                    .add("hide");
+
+
+                document
+                    .getElementById("site")
+                    .classList
+                    .add("ready");
+
+            },
+            2400
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+const nav =
+    document.getElementById("nav");
+
+
+window.addEventListener(
     "scroll",
-    function() {
-
-        const header =
-            document.getElementById("header");
-
+    () => {
 
         if (
             window.scrollY > 50
         ) {
 
-            header.classList.add(
+            nav.classList.add(
                 "scrolled"
             );
 
         } else {
 
-            header.classList.remove(
+            nav.classList.remove(
                 "scrolled"
             );
 
@@ -1859,36 +3145,462 @@ window.addEventListener(
 
 
 /* =========================================================
-   IMAGE PARALLAX
+   REVEAL ON SCROLL
 ========================================================= */
 
-window.addEventListener(
-    "scroll",
-    function() {
+const revealElements =
+    document.querySelectorAll(
+        ".reveal"
+    );
 
-        const hero =
-            document.querySelector(
-                ".hero-right img"
+
+const revealObserver =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target.classList.add(
+                            "visible"
+                        );
+
+                        revealObserver.unobserve(
+                            entry.target
+                        );
+
+                    }
+
+                }
             );
 
-
-        if (!hero) return;
-
-
-        const scroll =
-            window.scrollY;
-
-
-        if (scroll < window.innerHeight) {
-
-            hero.style.transform =
-                `translateY(${scroll * .08}px) scale(1.02)`;
-
+        },
+        {
+            threshold: .12
         }
+    );
+
+
+revealElements.forEach(
+    element => {
+
+        revealObserver.observe(
+            element
+        );
 
     }
 );
 
+
+
+/* =========================================================
+   PROJECT FILTER
+========================================================= */
+
+const filters =
+    document.querySelectorAll(
+        ".filter"
+    );
+
+const projects =
+    document.querySelectorAll(
+        ".project"
+    );
+
+
+filters.forEach(
+    filter => {
+
+        filter.addEventListener(
+            "click",
+            () => {
+
+                filters.forEach(
+                    f =>
+                    f.classList.remove(
+                        "active"
+                    )
+                );
+
+
+                filter.classList.add(
+                    "active"
+                );
+
+
+                const category =
+                    filter.dataset.filter;
+
+
+                projects.forEach(
+                    project => {
+
+                        if (
+                            category === "all" ||
+                            project.dataset.category === category
+                        ) {
+
+                            project.style.display =
+                                "block";
+
+                            requestAnimationFrame(
+                                () => {
+
+                                    project.style.opacity =
+                                        "1";
+
+                                }
+                            );
+
+                        } else {
+
+                            project.style.display =
+                                "none";
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   COUNTER ANIMATION
+========================================================= */
+
+const counters =
+    document.querySelectorAll(
+        ".number-value"
+    );
+
+
+let countersStarted = false;
+
+
+function startCounters() {
+
+    if (
+        countersStarted
+    ) return;
+
+
+    countersStarted = true;
+
+
+    counters.forEach(
+        counter => {
+
+            const target =
+                parseInt(
+                    counter.dataset.target
+                );
+
+
+            let current = 0;
+
+
+            const update =
+                () => {
+
+                    current +=
+                        Math.ceil(
+                            target / 35
+                        );
+
+
+                    if (
+                        current >= target
+                    ) {
+
+                        current =
+                            target;
+
+                    }
+
+
+                    counter.textContent =
+                        current +
+                        (
+                            target === 100
+                            ? "%"
+                            : "+"
+                        );
+
+
+                    if (
+                        current < target
+                    ) {
+
+                        requestAnimationFrame(
+                            update
+                        );
+
+                    }
+
+                };
+
+
+            update();
+
+        }
+    );
+
+}
+
+
+const numberSection =
+    document.querySelector(
+        ".numbers"
+    );
+
+
+const numberObserver =
+    new IntersectionObserver(
+        entries => {
+
+            if (
+                entries[0].isIntersecting
+            ) {
+
+                startCounters();
+
+            }
+
+        },
+        {
+            threshold: .4
+        }
+    );
+
+
+numberObserver.observe(
+    numberSection
+);
+
+
+
+/* =========================================================
+   CONSTELLATION BACKGROUND
+========================================================= */
+
+const canvas =
+    document.getElementById(
+        "stars"
+    );
+
+const ctx =
+    canvas.getContext(
+        "2d"
+    );
+
+
+let stars = [];
+
+let W;
+let H;
+
+
+function resizeCanvas() {
+
+    W =
+        canvas.width =
+        window.innerWidth *
+        devicePixelRatio;
+
+    H =
+        canvas.height =
+        window.innerHeight *
+        devicePixelRatio;
+
+    canvas.style.width =
+        window.innerWidth + "px";
+
+    canvas.style.height =
+        window.innerHeight + "px";
+
+    ctx.scale(
+        devicePixelRatio,
+        devicePixelRatio
+    );
+
+}
+
+
+resizeCanvas();
+
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        stars = [];
+
+        resizeCanvas();
+
+        createStars();
+
+    }
+);
+
+
+function createStars() {
+
+    stars = [];
+
+
+    for (
+        let i = 0;
+        i < 90;
+        i++
+    ) {
+
+        stars.push({
+
+            x:
+                Math.random() *
+                window.innerWidth,
+
+            y:
+                Math.random() *
+                document.body.scrollHeight,
+
+            size:
+                Math.random() * 1.4,
+
+            opacity:
+                Math.random() * .5 + .1
+
+        });
+
+    }
+
+}
+
+
+createStars();
+
+
+function drawStars() {
+
+    ctx.clearRect(
+        0,
+        0,
+        window.innerWidth,
+        window.innerHeight
+    );
+
+
+    const scroll =
+        window.scrollY;
+
+
+    stars.forEach(
+        star => {
+
+            const y =
+                star.y -
+                scroll * .12;
+
+
+            if (
+                y < -10 ||
+                y > window.innerHeight + 10
+            ) return;
+
+
+            ctx.beginPath();
+
+            ctx.arc(
+                star.x,
+                y,
+                star.size,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                `rgba(198,166,107,${star.opacity})`;
+
+            ctx.fill();
+
+        }
+    );
+
+
+    requestAnimationFrame(
+        drawStars
+    );
+
+}
+
+
+drawStars();
+
+
+
+/* =========================================================
+   MAGNETIC BUTTON
+========================================================= */
+
+const magnetic =
+    document.querySelectorAll(
+        ".magnetic"
+    );
+
+
+magnetic.forEach(
+    item => {
+
+        item.addEventListener(
+            "mousemove",
+            e => {
+
+                const rect =
+                    item.getBoundingClientRect();
+
+
+                const x =
+                    e.clientX -
+                    rect.left -
+                    rect.width / 2;
+
+
+                const y =
+                    e.clientY -
+                    rect.top -
+                    rect.height / 2;
+
+
+                item.style.transform =
+                    `translate(${x * .15}px,
+                               ${y * .15}px)`;
+
+            }
+        );
+
+
+        item.addEventListener(
+            "mouseleave",
+            () => {
+
+                item.style.transform =
+                    "translate(0,0)";
+
+            }
+        );
+
+    }
+);
 
 </script>
 
